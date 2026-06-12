@@ -222,16 +222,42 @@ p {
   font-size: 19px;
 }
 
-.library-note {
+.holding-endorsement {
+  display: grid;
+  gap: 18px;
+  border: 1px solid var(--mist);
   border-left: 4px solid var(--ink);
-  padding: 4px 0 4px 18px;
+  border-radius: var(--radius);
+  background: rgba(251, 250, 246, .56);
+  padding: 22px;
   color: var(--stone);
 }
 
-.library-note strong {
+.holding-endorsement__logo {
+  display: block;
+  width: min(150px, 100%);
+  height: auto;
+}
+
+.holding-endorsement__copy {
+  display: grid;
+  gap: 7px;
+}
+
+.holding-endorsement__copy strong {
   display: block;
   color: var(--ink);
   font-size: 15px;
+}
+
+.holding-endorsement__copy span,
+.holding-endorsement__copy small {
+  display: block;
+}
+
+.holding-endorsement__copy small {
+  color: var(--stone-2);
+  font-size: 12px;
 }
 
 .manual-grid {
@@ -528,6 +554,10 @@ p {
   .hero p,
   .manual-intro p {
     font-size: 16px;
+  }
+
+  .holding-endorsement__logo {
+    width: min(120px, 100%);
   }
 
   .manual-card h2 {

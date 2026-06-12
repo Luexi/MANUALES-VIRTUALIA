@@ -19,6 +19,7 @@ La direccion visual es una biblioteca de producto: papel calido, tipografia ampl
 - `hub/DESIGN.md`: Hub usa violet `#7C3AED` como acento principal y el mark Pulse.
 - `brand/BRAND.md`: el lockup correcto es producto grande y `by Virtualia` pequeno en Familjen Grotesk italic. No se reutiliza el mark corporativo de Virtualia TIC dentro de productos.
 - `Condo/DESIGN.md` y la app Condo: confirman lockup visible `Condo by Virtualia`; el mark operativo activo es `cd-brand-mark`, un tile teal redondeado con `C`.
+- `assets/virtualia-tic.png`: logo de holding usado como endoso institucional en la landing, no como mark de producto.
 
 ## Tokens
 
@@ -45,6 +46,7 @@ La direccion visual es una biblioteca de producto: papel calido, tipografia ampl
 - Hub puede usar violeta como acento principal, sin caer en una UI dominada por violeta.
 - Condo usa teal como acento principal y el mark rescatado del lockup activo del producto Condo.
 - La landing madre debe sentirse Virtualia y biblioteca, no PMS.
+- El logo Virtualia TIC puede aparecer como endoso institucional en landing o footer, pero no reemplaza los marks de PMS, Hub o Condo.
 
 ## Componentes
 

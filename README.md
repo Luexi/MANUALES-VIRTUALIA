@@ -26,6 +26,7 @@ MANUALES-VIRTUALIA/
     index.html
   assets/
     virtualia-mark.svg
+    virtualia-tic.png
     hub-mark.svg
     condo-mark.svg
     site.css
