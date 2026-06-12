@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manual Operativo · Virtualia PMS</title>
+<meta name="description" content="Manual operativo publico de Virtualia PMS para hoteles: reservaciones, front desk, caja, housekeeping, clientes, reportes, finanzas y configuracion." />
+<link rel="canonical" href="https://luexi.github.io/MANUALES-VIRTUALIA/pms/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Manual Operativo · Virtualia PMS" />
+<meta property="og:description" content="Guia publica del PMS hotelero Virtualia: operacion diaria, roles, capturas y flujos principales para equipos de hotel." />
+<meta property="og:url" content="https://luexi.github.io/MANUALES-VIRTUALIA/pms/" />
+<meta property="og:image" content="https://luexi.github.io/MANUALES-VIRTUALIA/pms/img/02-frontdesk.png" />
+<link rel="icon" type="image/svg+xml" href="img/pms-mark.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Familjen+Grotesk:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --ink: #0E2E3A;
+  --ink-2: #143946;
+  --stone: #6F6E70;
+  --stone-2: #9A9897;
+  --paper: #F6F4EE;
+  --paper-2: #EDEBE3;
+  --mist: #E1DDD2;
+  --azure: #0F7DF5;
+  --azure-deep: #0A4FA5;
+  --azure-soft: #DCEBFE;
+  --border: var(--mist);
+  --radius: 8px;
+  --shadow-soft: 0 14px 35px -28px rgba(14, 46, 58, .52), 0 2px 10px rgba(14, 46, 58, .08);
+  --shadow-deep: 0 34px 70px -42px rgba(14, 46, 58, .72), 0 10px 26px -18px rgba(14, 46, 58, .44);
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-byline: "Familjen Grotesk", "Manrope", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+
+body {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--paper);
+}
+body.lightbox-open { overflow: hidden; }
+
+/* ============ Layout ============ */
+.layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 704px);
+  align-items: start;
+  gap: 56px;
+  min-height: 100vh;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+aside.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  color: var(--ink);
+  padding: 32px 0 40px;
+  border-right: 1px solid var(--mist);
+}
+
+main.content {
+  min-width: 0;
+  padding: 44px 0 108px;
+  max-width: 704px;
+}
+
+aside.page-index {
+  display: none;
+  position: sticky;
+  top: 32px;
+  max-height: calc(100vh - 64px);
+  overflow: auto;
+  padding: 6px 0 32px;
+  color: var(--stone);
+}
+
+.page-index__label,
+.sidebar .doc-title {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.page-index__label { margin-bottom: 12px; }
+
+.page-index nav { display: flex; flex-direction: column; gap: 2px; }
+.page-index a {
+  display: block;
+  padding: 6px 0 6px 14px;
+  border-left: 1px solid var(--mist);
+  color: var(--stone);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  transition: color .16s ease, border-color .16s ease, transform .16s ease;
+}
+.page-index a:hover,
+.page-index a.is-active {
+  color: var(--ink);
+  border-left-color: var(--azure);
+  transform: translateX(2px);
+}
+.page-index__empty { font-size: 12.5px; color: var(--stone-2); }
+
+/* ============ Logo lockup ============ */
+.vlogo { display: inline-flex; align-items: center; gap: 13px; line-height: 1; margin-bottom: 6px; }
+.vlogo__chip { width: 42px; height: 42px; border-radius: 10px; background: var(--paper-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.vlogo__chip img { width: 30px; height: 30px; }
+.vlogo__divider { width: 1px; align-self: stretch; background: rgba(14,46,58,.22); }
+.vlogo__stack { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+.vlogo__name { font-weight: 800; font-size: 23px; letter-spacing: -.035em; color: var(--ink); }
+.vlogo__byline { font-family: var(--font-byline); font-style: italic; font-weight: 400; font-size: 12px; color: var(--stone); }
+.vlogo__byline strong { font-style: normal; font-weight: 600; color: var(--ink); }
+.sidebar .doc-title {
+  margin: 20px 0 22px;
+}
+
+/* ============ Nav ============ */
+nav.toc { display: flex; flex-direction: column; gap: 2px; }
+nav.toc a {
+  display: flex; align-items: baseline; gap: 10px;
+  color: var(--stone); text-decoration: none;
+  font-size: 13.5px; font-weight: 500;
+  padding: 7px 0 7px 12px;
+  border-left: 1px solid transparent;
+  transition: color .16s ease, border-color .16s ease, transform .16s ease;
+}
+nav.toc a .n {
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--stone-2);
+  min-width: 18px;
+}
+nav.toc a:hover,
+nav.toc a.active { color: var(--ink); border-left-color: var(--azure); transform: translateX(2px); }
+nav.toc a.active .n { color: var(--azure); }
+
+.sidebar .foot {
+  margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--mist);
+  font-size: 11.5px; color: var(--stone); line-height: 1.6;
+}
+
+/* ============ Hero ============ */
+header.hero {
+  color: var(--ink);
+  padding: 10px 0 72px;
+  margin-bottom: 34px;
+  position: relative;
+  min-height: 570px;
+}
+header.hero h1 {
+  font-size: clamp(48px, 6.4vw, 68px);
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: .96;
+  margin-bottom: 22px;
+}
+header.hero p.sub { font-size: 17px; color: var(--ink-2); max-width: 620px; line-height: 1.62; }
+.hero__copy {
+  position: relative;
+  z-index: 2;
+  max-width: 320px;
+}
+header.hero .meta {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 26px;
+}
+header.hero .meta span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--paper-2);
+  color: var(--ink-2);
+  border: 1px solid var(--mist);
+}
+.hero__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--azure);
+  margin-bottom: 18px;
+}
+.hero__visual {
+  position: absolute;
+  z-index: 1;
+  width: min(380px, 56vw);
+  right: 0;
+  top: 218px;
+  transform: perspective(1200px) rotateY(-2.2deg) rotateZ(1.6deg);
+  transform-origin: center;
+  filter: drop-shadow(0 32px 44px rgba(14, 46, 58, .28));
+}
+.hero__visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--mist);
+  box-shadow: var(--shadow-deep);
+}
+
+/* ============ Sections & headings ============ */
+section.sec {
+  margin-bottom: 92px;
+  scroll-margin-top: 30px;
+}
+body.motion-ready section.sec {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+body.motion-ready section.sec.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.sec-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em;
+  color: var(--azure); text-transform: uppercase; margin-bottom: 8px;
+}
+.sec-label::before { content: ""; width: 22px; height: 2px; background: var(--azure); border-radius: 2px; }
+section.sec > h2 {
+  font-size: clamp(34px, 4vw, 46px);
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+section.sec h3 {
+  font-size: 22px; font-weight: 800; letter-spacing: -.02em;
+  margin: 46px 0 14px; color: var(--ink);
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  scroll-margin-top: 28px;
+}
+section.sec h4 {
+  font-size: 15px; font-weight: 700; margin: 22px 0 8px; color: var(--ink-2);
+}
+section.sec p { margin-bottom: 12px; color: var(--ink-2); }
+section.sec p.lead { font-size: 17px; color: var(--ink-2); }
+section.sec ul, section.sec ol { margin: 0 0 14px 22px; color: var(--ink-2); }
+section.sec li { margin-bottom: 6px; }
+section.sec li::marker { color: var(--azure); font-weight: 700; }
+
+/* ============ Chips & badges ============ */
+.route {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  background: var(--azure-soft); color: var(--azure-deep);
+  padding: 2px 8px; border-radius: 6px; white-space: nowrap;
+}
+.kbd {
+  font-family: var(--font-mono); font-size: 12px;
+  background: var(--paper-2); border: 1px solid var(--mist);
+  padding: 1px 7px; border-radius: 5px; color: var(--ink-2);
+}
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  padding: 3px 10px; border-radius: 999px; vertical-align: middle;
+}
+.badge.admin { background: var(--ink); color: var(--paper); }
+.badge.manager { background: var(--azure-deep); color: var(--paper); }
+.badge.frontdesk { background: var(--azure); color: var(--paper); }
+.badge.auditor { background: var(--paper-2); color: var(--ink-2); border: 1px solid var(--mist); }
+.badge.hk { background: var(--mist); color: var(--ink-2); }
+.badge.state { background: var(--paper-2); color: var(--ink-2); border: 1px solid var(--mist); font-family: var(--font-mono); font-weight: 500; }
+
+/* ============ Callouts ============ */
+.callout {
+  display: flex; gap: 13px; align-items: flex-start;
+  border-radius: var(--radius); padding: 16px 18px; margin: 18px 0;
+  font-size: 14px; line-height: 1.6;
+}
+.svg-ico {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: currentColor;
+  stroke-width: 1.5;
+}
+.callout .svg-ico { margin-top: 3px; color: var(--azure); }
+.callout b, .callout strong { font-weight: 700; }
+.callout.info { background: var(--azure-soft); color: var(--azure-deep); }
+.callout.warn { background: var(--paper-2); color: var(--ink-2); border-left: 3px solid var(--azure); }
+.callout.danger { background: var(--paper-2); color: var(--ink); border-left: 3px solid var(--ink); }
+.callout.perm { background: var(--paper-2); color: var(--ink-2); border: 1px dashed var(--stone-2); }
+.callout.shift { background: var(--paper); border: 1.5px solid var(--azure); color: var(--ink-2); }
+
+/* ============ Steps ============ */
+ol.steps { list-style: none; margin: 18px 0 22px; counter-reset: step; }
+ol.steps > li {
+  counter-increment: step;
+  position: relative;
+  padding: 0 0 18px 52px;
+  margin: 0;
+}
+ol.steps > li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: -2px;
+  width: 32px; height: 32px; border-radius: 10px;
+  background: var(--azure); color: var(--paper);
+  font-weight: 800; font-size: 14.5px;
+  display: flex; align-items: center; justify-content: center;
+}
+ol.steps > li:not(:last-child)::after {
+  content: ""; position: absolute; left: 15.5px; top: 34px; bottom: 2px;
+  width: 1.5px; background: var(--mist);
+}
+ol.steps > li > b:first-child { display: block; font-weight: 700; margin-bottom: 2px; }
+
+/* ============ Tables ============ */
+.tablewrap { overflow-x: auto; margin: 20px 0 26px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--paper); box-shadow: 0 1px 0 rgba(14,46,58,.03); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+thead th {
+  background: var(--ink); color: var(--paper); text-align: left;
+  font-weight: 700; font-size: 12px; letter-spacing: .05em;
+  padding: 10px 14px; white-space: nowrap;
+}
+tbody td { padding: 9px 14px; border-top: 1px solid var(--border); vertical-align: top; }
+tbody tr:nth-child(even) { background: var(--paper-2); }
+td.c { text-align: center; }
+.yes { color: var(--azure-deep); font-weight: 800; }
+.no { color: var(--stone-2); font-weight: 600; }
+.lock { color: var(--ink); font-weight: 700; font-size: 12px; }
+tr.subhead td {
+  background: var(--paper-2); font-weight: 800; font-size: 11.5px;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2);
+  padding: 7px 14px;
+}
+
+/* ============ Figures ============ */
+figure.shot { margin: 28px 0 34px; }
+.browser-shot {
+  overflow: hidden;
+  border: 1px solid var(--mist);
+  border-radius: 14px;
+  background: var(--paper);
+  box-shadow: var(--shadow-soft);
+}
+.browser-bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--mist);
+}
+.browser-dots { display: flex; align-items: center; gap: 6px; }
+.browser-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--stone-2);
+  opacity: .78;
+}
+.browser-url {
+  display: block;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--mist);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--stone);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 7px 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.shot-link {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: var(--paper);
+  cursor: zoom-in;
+}
+.shot-link:focus-visible {
+  outline: 2px solid var(--azure);
+  outline-offset: -4px;
+}
+figure.shot img { display: block; width: 100%; height: auto; }
+figure.shot figcaption {
+  font-size: 12.5px; color: var(--stone); margin-top: 10px; text-align: center;
+}
+figure.shot figcaption b { color: var(--ink-2); }
+
+/* ============ State flow diagram ============ */
+.flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin: 20px 0 8px; row-gap: 14px; }
+.flow .node {
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 500;
+  padding: 9px 16px; border-radius: 10px; white-space: nowrap;
+}
+.flow .arrow { color: var(--stone-2); font-size: 17px; padding: 0 10px; }
+.node.draft { background: var(--paper-2); color: var(--ink-2); border: 1.5px dashed var(--stone-2); }
+.node.confirmed { background: var(--azure-soft); color: var(--azure-deep); border: 1.5px solid var(--azure); }
+.node.checkedin { background: var(--azure); color: var(--paper); }
+.node.checkedout { background: var(--ink); color: var(--paper); }
+.node.cancelled { background: var(--paper-2); color: var(--ink); border: 1.5px solid var(--stone-2); }
+.node.noshow { background: var(--mist); color: var(--ink-2); border: 1.5px solid var(--stone-2); }
+.flow-terminals { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 14px 0; align-items: center; }
+.flow-terminals .lbl { font-size: 12.5px; color: var(--stone); margin-right: 4px; }
+
+/* ============ Price cascade ============ */
+.cascade { display: flex; flex-direction: column; gap: 0; margin: 18px 0 22px; max-width: 560px; }
+.cascade .lvl {
+  display: flex; gap: 14px; align-items: center;
+  background: var(--paper); border: 1px solid var(--border); border-radius: 12px;
+  padding: 13px 18px; position: relative;
+}
+.cascade .lvl + .lvl { margin-top: 26px; }
+.cascade .lvl + .lvl::before {
+  content: "↓ si no existe"; position: absolute; top: -23px; left: 24px;
+  font-size: 11px; font-weight: 600; color: var(--stone);
+}
+.cascade .lvl .prio {
+  width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 14px; color: var(--paper);
+}
+.cascade .lvl:nth-child(1) .prio { background: var(--azure-deep); }
+.cascade .lvl:nth-child(2) .prio { background: var(--azure); }
+.cascade .lvl:nth-child(3) .prio { background: var(--stone); }
+.cascade .lvl b { display: block; font-size: 14px; }
+.cascade .lvl span { font-size: 12.5px; color: var(--stone); }
+
+/* ============ Rate color legend ============ */
+.ratelegend { display: flex; gap: 12px; flex-wrap: wrap; margin: 14px 0 20px; }
+.ratelegend .item {
+  display: flex; align-items: center; gap: 8px; font-size: 13px;
+  background: var(--paper); border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px;
+}
+.ratelegend .sw { width: 18px; height: 18px; border-radius: 5px; border: 1px solid rgba(14,46,58,.14); }
+.sw.none { background: var(--paper); }
+.sw.override { background: var(--paper-2); }
+.sw.season { background: var(--mist); }
+.sw.local { background: var(--azure-soft); }
+
+/* ============ FAQ ============ */
+details.faq {
+  background: var(--paper); border: 1px solid var(--border); border-radius: var(--radius);
+  margin-bottom: 10px; overflow: hidden;
+}
+details.faq summary {
+  cursor: pointer; padding: 14px 18px; font-weight: 700; font-size: 14.5px;
+  list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 14px;
+  color: var(--ink);
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after { content: "+"; font-size: 19px; font-weight: 500; color: var(--azure); transition: transform .2s; }
+details.faq[open] summary::after { transform: rotate(45deg); }
+details.faq .a { padding: 0 18px 16px; font-size: 14px; color: var(--ink-2); }
+details.faq .a p { margin-bottom: 8px; }
+
+/* ============ Cards grid ============ */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 18px 0 22px; }
+.card {
+  background: var(--paper); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 17px 18px;
+}
+.card b.t { display: flex; align-items: center; gap: 8px; font-size: 14.5px; margin-bottom: 6px; color: var(--ink); }
+.card b.t .svg-ico { color: var(--azure); width: 19px; height: 19px; }
+.card p { font-size: 13.5px; color: var(--ink-2); margin: 0; }
+
+/* ============ Divider note ============ */
+.toplink { text-align: right; margin-top: 26px; }
+.toplink a { font-size: 12px; color: var(--stone); text-decoration: none; }
+.toplink a:hover { color: var(--azure); }
+
+/* ============ Lightbox ============ */
+.lightbox[hidden] { display: none; }
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 34px;
+  background: rgba(14, 46, 58, .82);
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.lightbox.is-open { opacity: 1; }
+.lightbox__frame {
+  max-width: min(1180px, 94vw);
+  max-height: 90vh;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.lightbox__frame img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(90vh - 54px);
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  background: var(--paper);
+  box-shadow: var(--shadow-deep);
+}
+.lightbox__caption {
+  color: var(--paper);
+  text-align: center;
+  font-size: 13px;
+}
+.lightbox__close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(246, 244, 238, .28);
+  border-radius: 999px;
+  background: rgba(246, 244, 238, .12);
+  color: var(--paper);
+  cursor: pointer;
+}
+.lightbox__close:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+
+/* ============ Print ============ */
+@media print {
+  html { scroll-behavior: auto; }
+  aside.sidebar,
+  aside.page-index,
+  .lightbox,
+  .hero__visual { display: none !important; }
+  .layout { display: block; max-width: none; padding: 0; }
+  main.content { padding: 0; max-width: none; }
+  header.hero { display: block; padding: 0 0 24px; margin: 0 0 20px; border-bottom: 1px solid var(--mist); }
+  header.hero h1 { font-size: 42px; }
+  section.sec { break-before: page; page-break-before: always; margin-bottom: 30px; opacity: 1 !important; transform: none !important; }
+  section.sec:first-of-type { break-before: avoid; page-break-before: avoid; }
+  section.sec > h2 { font-size: 30px; }
+  .tablewrap,
+  figure.shot,
+  .card,
+  .callout,
+  details.faq { break-inside: avoid; page-break-inside: avoid; }
+  .browser-bar { display: none; }
+  .browser-shot { box-shadow: none; border: 1px solid var(--mist); }
+  .shot-link { cursor: default; }
+  details.faq { page-break-inside: avoid; }
+  details.faq summary::after { display: none; }
+  .toplink { display: none; }
+  body { background: var(--paper); }
+}
+
+@media (min-width: 1280px) {
+  .layout {
+    grid-template-columns: 260px minmax(0, 704px) 220px;
+    gap: 48px;
+    max-width: 1320px;
+  }
+  aside.page-index { display: block; }
+}
+
+@media (max-width: 980px) {
+  .layout { display: block; padding: 0 22px; }
+  aside.sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--mist); padding: 24px 0; }
+  main.content { padding: 34px 0 80px; max-width: none; }
+  header.hero { display: block; min-height: auto; padding: 4px 0 52px; }
+  header.hero h1 { font-size: 44px; }
+  .hero__copy { max-width: 560px; }
+  .hero__visual { position: relative; top: auto; right: auto; width: 100%; margin-top: 30px; max-width: 560px; transform: rotateZ(1deg); }
+}
+
+@media (max-width: 640px) {
+  header.hero h1 { font-size: 38px; }
+  section.sec > h2 { font-size: 32px; }
+  section.sec h3 { font-size: 20px; }
+  .browser-bar { grid-template-columns: 44px minmax(0, 1fr); gap: 8px; }
+  .browser-url { font-size: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  body.motion-ready section.sec {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+</head>
+<body id="top">
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="vlogo">
+    <span class="vlogo__chip"><img src="img/pms-mark.svg" alt="" /></span>
+    <span class="vlogo__divider"></span>
+    <span class="vlogo__stack">
+      <span class="vlogo__name">PMS</span>
+      <span class="vlogo__byline">by <strong>Virtualia</strong></span>
+    </span>
+  </div>
+  <div class="doc-title">Manual operativo</div>
+  <nav class="toc" id="toc">
+    <a href="#introduccion"><span class="n">01</span> Introducción y roles</a>
+    <a href="#frontdesk"><span class="n">02</span> Front Desk</a>
+    <a href="#reservaciones"><span class="n">03</span> Calendario y reservaciones</a>
+    <a href="#tarifas"><span class="n">04</span> Tarifas</a>
+    <a href="#caja"><span class="n">05</span> Caja y turnos</a>
+    <a href="#housekeeping"><span class="n">06</span> Housekeeping</a>
+    <a href="#clientes"><span class="n">07</span> Clientes y asistente</a>
+    <a href="#reportes"><span class="n">08</span> Reportes, balance y finanzas</a>
+    <a href="#configuracion"><span class="n">09</span> Configuración</a>
+    <a href="#faq"><span class="n">10</span> Preguntas frecuentes</a>
+    <a href="#glosario"><span class="n">11</span> Glosario</a>
+  </nav>
+  <div class="foot">
+    Guía de uso para gerencia, recepción, auditoría y limpieza.<br /><br />
+    Las capturas provienen de un hotel de demostración; los nombres y montos son ficticios.
+  </div>
+</aside>
+
+<main class="content">
+
+<header class="hero">
+  <div class="hero__copy">
+    <div class="hero__eyebrow">Manual operativo</div>
+    <h1>Manual Operativo<br />Virtualia PMS</h1>
+    <p class="sub">Todo lo que necesitas para operar el hotel día a día: reservaciones, caja, housekeeping, clientes y reportes — explicado paso a paso y con pantallas reales del sistema.</p>
+    <div class="meta">
+      <span>Recepción</span><span>Gerencia</span><span>Auditoría</span><span>Limpieza</span>
+    </div>
+  </div>
+  <div class="hero__visual" aria-hidden="true">
+    <img src="img/02-frontdesk.png" alt="" />
+  </div>
+</header>
+
+<!-- ============================================================ 1 -->
+<section class="sec" id="introduccion">
+  <div class="sec-label">Sección 01</div>
+  <h2>Introducción y roles</h2>
+  <p class="lead">Virtualia PMS es el sistema de gestión del hotel. Se usa desde el navegador web con el usuario y la contraseña que te asignaron. No necesitas instalar nada.</p>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/login</span></div>
+      <button type="button" class="shot-link" data-full="img/01-login.png" aria-label="Ampliar captura: Pantalla de inicio de sesión"><img src="img/01-login.png" alt="Pantalla de inicio de sesión" /></button>
+    </div>
+    <figcaption><b>Inicio de sesión.</b> Puedes entrar con tu usuario o con tu correo.</figcaption>
+  </figure>
+
+  <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div>Si olvidaste tu contraseña o tu cuenta está bloqueada, pide a un <b>administrador</b> que te la restablezca desde <span class="route">Configuración &gt; Equipo</span>.</div></div>
+
+  <h3>Los cinco roles del sistema</h3>
+  <div class="cards">
+    <div class="card"><b class="t"><span class="badge admin">ADMIN</span> Administración</b><p>Acceso total. Único rol que crea usuarios, cambia contraseñas y asigna roles altos.</p></div>
+    <div class="card"><b class="t"><span class="badge manager">GERENTE</span> Gerencia</b><p>Opera todo el hotel, gestiona tarifas, cierres, correcciones, reportes y roles operativos.</p></div>
+    <div class="card"><b class="t"><span class="badge frontdesk">RECEPCIÓN</span> Front desk</b><p>Opera reservaciones, pagos y su propio turno de caja. No ve reportes financieros globales.</p></div>
+    <div class="card"><b class="t"><span class="badge auditor">AUDITOR</span> Auditoría</b><p>Consulta reportes, balance, historial y finanzas en modo lectura. No captura ni modifica.</p></div>
+    <div class="card"><b class="t"><span class="badge hk">LIMPIEZA</span> Housekeeping</b><p>Ve el tablero de habitaciones y marca como limpias las habitaciones sucias.</p></div>
+  </div>
+
+  <h3>¿Quién puede hacer qué?</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Función</th><th>Admin</th><th>Gerente</th><th>Recepción</th><th>Auditor</th><th>Limpieza</th></tr></thead>
+    <tbody>
+      <tr class="subhead"><td colspan="6">Operación diaria</td></tr>
+      <tr><td>Operar Front Desk</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Crear y editar reservaciones</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Añadir noche a huésped en casa</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Regularizar estancia vencida</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Reactivar reserva cancelada</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Registrar pagos y cargos</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Aplicar ajustes de precio</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Bloquear / desbloquear precio pactado</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Consultar historial de reservaciones</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td></tr>
+      <tr><td>Bloquear habitaciones</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓ *</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr class="subhead"><td colspan="6">Caja y turnos</td></tr>
+      <tr><td>Abrir turno</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Cerrar definitivamente tu propio turno</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Cerrar turno de otra persona</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Reabrir un turno cerrado</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Transferir turno (handoff)</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Corregir método de pago del turno activo</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓ *</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Retiro de utilidad</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Corregir un día ya auditado</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Reabrir un día auditado</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Ejecutar auditoría nocturna</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr class="subhead"><td colspan="6">Finanzas y reportes</td></tr>
+      <tr><td>Ver reportes y balance</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c yes">✓</td><td class="c no">—</td></tr>
+      <tr><td>Ver Finanzas</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c yes">✓</td><td class="c no">—</td></tr>
+      <tr><td>Capturar en Finanzas</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Ver Banco y exportar movimientos</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c yes">✓</td><td class="c no">—</td></tr>
+      <tr><td>Ver Costo por noche</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c yes">✓</td><td class="c no">—</td></tr>
+      <tr><td>Ver incidentes operativos</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c yes">✓</td><td class="c no">—</td></tr>
+      <tr><td>Ver historial de auditoría</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c yes">✓</td><td class="c no">—</td></tr>
+      <tr class="subhead"><td colspan="6">Clientes y asistente</td></tr>
+      <tr><td>Usar asistente interno de consulta</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td></tr>
+      <tr class="subhead"><td colspan="6">Configuración</td></tr>
+      <tr><td>Editar tarifas y reglas de precios</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Configurar inventario y catálogos</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Cambiar roles operativos</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Crear / desactivar usuarios</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Cambiar correo / contraseña de usuarios</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr><td>Cambiar roles altos (Admin, Gerente)</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      <tr class="subhead"><td colspan="6">Housekeeping</td></tr>
+      <tr><td>Ver tablero de housekeeping</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td>Marcar habitación como limpia</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:13px;color:var(--stone)">* Recepción solo corrige métodos de pago de movimientos de su turno activo bajo su custodia, y solo puede crear bloqueos de habitación de tipo <em>operacional</em>. Liberar bloqueos y crear bloqueos de mantenimiento es de gerencia/admin.</p>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<!-- ============================================================ 2 -->
+<section class="sec" id="frontdesk">
+  <div class="sec-label">Sección 02</div>
+  <h2>Front Desk — la página principal</h2>
+  <p class="lead">Al iniciar sesión llegas al Front Desk. Es tu centro de operación: muestra la fecha de negocio, el estado de tu turno y todo lo que necesita atención hoy.</p>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/</span></div>
+      <button type="button" class="shot-link" data-full="img/02-frontdesk.png" aria-label="Ampliar captura: Front Desk"><img src="img/02-frontdesk.png" alt="Front Desk" /></button>
+    </div>
+    <figcaption><b>Front Desk.</b> Pulso del día: ocupación, llegadas, salidas, huéspedes en casa y alertas.</figcaption>
+  </figure>
+
+  <h3>Qué muestra cada bloque</h3>
+  <div class="cards">
+    <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18" /><path d="M8 17V9" /><path d="M13 17V6" /><path d="M18 17v-4" /></svg>Hoy y pulso operativo</b><p>Llegadas, salidas y huéspedes en casa del día. Ocupación y estado de habitaciones de un vistazo.</p></div>
+    <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 21h4" /><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" /></svg>Alertas operativas</b><p>Saldo por cobrar, reservas sin habitación y reservas vencidas que requieren tu decisión.</p></div>
+    <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 17h20" /><path d="m3 9 13 5 5-5" /><path d="m8 5 4 7" /><path d="m14 6 3 4" /></svg>Llegadas de hoy</b><p>Reservas confirmadas que entran hoy. Desde aquí haces check-in directo y registras pagos.</p></div>
+    <div class="card"><b class="t">🛫 Salidas de hoy</b><p>Reservas que salen hoy, con botón de check-out.</p></div>
+    <div class="card"><b class="t">🏠 En casa</b><p>Todos los huéspedes actualmente alojados.</p></div>
+    <div class="card"><b class="t">💰 Pendientes de cobro</b><p>Reservas activas con saldo mayor a cero, separadas de los rezagos viejos.</p></div>
+    <div class="card"><b class="t">⏰ Vencidas para revisar</b><p>Reservas viejas que requieren decisión humana: no-show manual o regularizar estancia.</p></div>
+    <div class="card"><b class="t">🧹 Habitaciones sucias y bloqueadas</b><p>Lo que limpieza debe atender y lo que está fuera de servicio.</p></div>
+  </div>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/</span></div>
+      <button type="button" class="shot-link" data-full="img/03-frontdesk-listas.png" aria-label="Ampliar captura: Listas de llegadas, salidas y en casa"><img src="img/03-frontdesk-listas.png" alt="Listas de llegadas, salidas y en casa" /></button>
+    </div>
+    <figcaption><b>Listas operativas.</b> Cada tarjeta trae acciones rápidas: check-in, check-out, pago y asignación de habitación.</figcaption>
+  </figure>
+
+  <h3>Acciones rápidas desde el Front Desk</h3>
+  <ul>
+    <li><b>Asignar habitación</b>: en la tarjeta de la reservación, elige una habitación disponible del menú.</li>
+    <li><b>Registrar pago</b>: abre el diálogo de pago, captura monto, forma de pago (efectivo, tarjeta de débito/crédito, transferencia, MercadoPago, PayPal…), revisa la cuenta fuente sugerida (<b>Caja</b> o <b>Bancos</b>) y agrega notas si quieres. Requiere turno abierto.</li>
+    <li><b>Check-in</b>: la reserva debe estar <b>confirmada</b>, tener <b>habitación asignada</b> y su fecha de entrada debe ser <b>hoy</b>.</li>
+    <li><b>Check-out</b>: verifica antes que el saldo esté en cero.</li>
+    <li><b>No-show manual</b>: para reservas confirmadas que nunca llegaron. Pide un motivo y conserva folio, pagos y anticipos tal como estaban.</li>
+    <li><b>Regularizar estancia</b>: para reservas vencidas donde el huésped sí se hospedó pero se olvidó registrar la entrada/salida. Marca la reserva como concluida con un motivo, sin tocar dinero.</li>
+  </ul>
+
+  <div class="callout warn"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.5 18-8.2-14.2a1.5 1.5 0 0 0-2.6 0L2.5 18a1.5 1.5 0 0 0 1.3 2.2h16.4a1.5 1.5 0 0 0 1.3-2.2Z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg><div><b>Si el huésped llega antes de su fecha</b>, no hagas check-in directo: primero reprograma la reservación a hoy (desde el Calendario o desde el detalle con <em>Reprogramar / editar</em>) y después haz el check-in.</div></div>
+
+  <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div>El cambio de habitación de un huésped <b>ya en casa</b> no se hace desde el Front Desk: usa <em>Reprogramar / editar</em> en el detalle o arrastra la reserva en el Calendario, para que quede con vista previa, advertencias e historial.</div></div>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<!-- ============================================================ 3 -->
+<section class="sec" id="reservaciones">
+  <div class="sec-label">Sección 03</div>
+  <h2>Calendario y reservaciones</h2>
+  <p class="lead">El calendario <span class="route">/calendar</span> es la vista gráfica de todas las reservaciones por habitación y fecha. Desde ahí creas, mueves y consultas reservas.</p>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/calendar</span></div>
+      <button type="button" class="shot-link" data-full="img/04-calendario.png" aria-label="Ampliar captura: Calendario de reservaciones"><img src="img/04-calendario.png" alt="Calendario de reservaciones" /></button>
+    </div>
+    <figcaption><b>Calendario.</b> Cada fila es una habitación; cada barra de color, una reservación.</figcaption>
+  </figure>
+
+  <h3>Cómo moverte</h3>
+  <ul>
+    <li>Avanza o retrocede por semana o mes; el botón <span class="kbd">Hoy</span> te regresa a la fecha actual.</li>
+    <li>Las reservas canceladas y los no-show <b>no aparecen</b> como ocupación ni bloquean disponibilidad; siguen consultables en el historial.</li>
+    <li>La <b>escobita</b> junto al número de habitación indica limpieza: encendida = sucia, apagada = limpia. Recepción, gerencia y admin pueden hacer clic para alternarla; el cambio se refleja en Housekeeping.</li>
+    <li>Cada tipo de habitación es una sección con su nombre, número de habitaciones, capacidad y configuración de camas (si está capturada en Configuración).</li>
+  </ul>
+
+  <h3>Ver el detalle sin salir del calendario</h3>
+  <p>Un clic sobre una reserva abre una burbuja con lo esencial: huésped, teléfono, personas, habitación, fechas, cargos, pagos, saldo y estado. Desde ahí puedes ir a <span class="kbd">Ver detalle completo</span>, hacer <span class="kbd">Check-in</span> o <span class="kbd">Añadir noche</span> si el rol y el turno lo permiten.</p>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/calendar</span></div>
+      <button type="button" class="shot-link" data-full="img/05-calendario-burbuja.png" aria-label="Ampliar captura: Burbuja de resumen de reserva"><img src="img/05-calendario-burbuja.png" alt="Burbuja de resumen de reserva" /></button>
+    </div>
+    <figcaption><b>Resumen rápido.</b> Clic en una barra = burbuja con datos y acciones; arrastrar = mover la reserva.</figcaption>
+  </figure>
+
+  <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div>Si la reserva pertenece a un <b>grupo</b>, el código que ves (RES-00000) es el del grupo, compartido por todas sus habitaciones. Usa <span class="kbd">Ver grupo</span> para abrir el detalle del grupo completo.</div></div>
+
+  <h3>Crear una reservación</h3>
+  <div class="callout shift"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg><div><b>Requiere turno abierto.</b> Sin un turno de caja activo bajo tu custodia, el sistema bloquea la creación de reservas — así todo anticipo queda registrado en un turno.</div></div>
+
+  <ol class="steps">
+    <li><b>Abre el formulario</b>Haz clic en una celda vacía del calendario o en el botón <span class="kbd">Nueva reserva</span>.</li>
+    <li><b>Captura al huésped</b>Nombre (obligatorio), número de personas, teléfono y canal (directo, teléfono, Booking o Expedia). Si es Booking/Expedia puedes capturar el número de reserva de la OTA.</li>
+    <li><b>Elige fechas y habitación</b>Fechas de entrada y salida, tipo de habitación y habitación. Solo aparecen habitaciones disponibles.</li>
+    <li><b>Revisa precio y anticipo</b>El sistema calcula "N noches × $X/noche" y pre-llena el total; puedes modificarlo (queda advertencia del precio estimado original). Si el huésped deja anticipo, captura monto y forma de pago; con $0 no se pide método. El anticipo entra como depósito a tu turno.</li>
+    <li><b>Confirma</b>La reserva queda creada y visible en el calendario y el Front Desk.</li>
+  </ol>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/calendar</span></div>
+      <button type="button" class="shot-link" data-full="img/06-nueva-reserva.png" aria-label="Ampliar captura: Formulario de nueva reserva"><img src="img/06-nueva-reserva.png" alt="Formulario de nueva reserva" /></button>
+    </div>
+    <figcaption><b>Nueva reserva</b> en tres pasos: huésped → fechas y habitación → precio y anticipo.</figcaption>
+  </figure>
+
+  <h3>Crear una reserva grupal</h3>
+  <p>Para grupos de dos o más habitaciones con las mismas fechas y un titular principal. Usa la flecha junto a <span class="kbd">Nueva reserva</span> y elige <span class="kbd">Nueva reserva grupal</span>.</p>
+  <ol class="steps">
+    <li><b>Captura el grupo</b>Titular principal, fechas comunes y canal.</li>
+    <li><b>Selecciona las habitaciones</b>Mínimo dos. Solo aparecen las disponibles para el rango completo.</li>
+    <li><b>Revisa los precios</b>El sistema sugiere el precio por habitación con la tarifa vigente. Si cambias un importe manualmente, esa habitación queda con <em>precio pactado bloqueado</em>.</li>
+    <li><b>Anticipo inicial (opcional)</b>Se reparte en partes iguales entre las habitaciones.</li>
+    <li><b>Confirma</b>Si alguna habitación deja de estar disponible, no se crea nada y el sistema te explica el bloqueo.</li>
+  </ol>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/groups/[id]</span></div>
+      <button type="button" class="shot-link" data-full="img/08-grupo-detalle.png" aria-label="Ampliar captura: Detalle de grupo"><img src="img/08-grupo-detalle.png" alt="Detalle de grupo" /></button>
+    </div>
+    <figcaption><b>Detalle del grupo.</b> Resumen general, total, anticipo, saldo y desglose por habitación. Cada habitación conserva su propio folio, pagos, check-in y check-out.</figcaption>
+  </figure>
+
+  <h4>Operar un grupo existente</h4>
+  <ul>
+    <li><span class="kbd">Editar</span>: cambia titular, canal y notas del grupo.</li>
+    <li><span class="kbd">Habitación</span>: agrega otra habitación con las fechas comunes del grupo.</li>
+    <li><span class="kbd">Adjuntar</span>: vincula una reserva existente que comparta las fechas.</li>
+    <li><span class="kbd">Cargo</span>: agrega un concepto y monto a las habitaciones que elijas, con su categoría de ingreso.</li>
+    <li><span class="kbd">Ajustar precios</span>: recalcula automático, fija precio por habitación o reparte un total manual del grupo.</li>
+    <li><span class="kbd">Pago</span>: registra un pago grupal; el sistema lo distribuye entre las habitaciones con saldo.</li>
+    <li><span class="kbd">Fechas</span>: reprograma todas las habitaciones con vista previa; si una no está disponible, no se cambia ninguna.</li>
+    <li><span class="kbd">Cancelar</span>: solo si ninguna habitación tiene check-in o check-out hecho.</li>
+    <li><span class="kbd">Quitar</span>: separa una habitación del grupo. Si su folio ya tiene pagos o cargos, se conserva como reserva individual; si solo tenía el hospedaje automático y no había iniciado, se cancela.</li>
+  </ul>
+
+  <h3>Mover reservaciones arrastrando</h3>
+  <ul>
+    <li>Las reservas en <b>borrador</b> o <b>confirmadas</b> se arrastran a nuevas fechas y/u otra habitación, incluso de tipo distinto.</li>
+    <li>Todo movimiento abre una <b>vista previa validada</b>, muestra advertencias y pide un <b>motivo</b> antes de confirmar.</li>
+    <li>Si cambias el tipo de habitación antes del check-in, decides: recalcular precio, conservarlo, o capturar un nuevo precio pactado.</li>
+    <li>Los huéspedes <b>en casa</b> también se pueden arrastrar para cambiar de habitación manteniendo las mismas fechas (incluso a otro tipo, como cortesía); el precio no cambia y el sistema pide confirmar la advertencia.</li>
+    <li>Las habitaciones de un grupo se arrastran solo individualmente para cambio de habitación; las fechas del grupo se cambian desde el detalle del grupo.</li>
+  </ul>
+
+  <h3>Estados de una reservación</h3>
+  <div class="flow">
+    <span class="node draft">borrador</span><span class="arrow">→</span>
+    <span class="node confirmed">confirmada</span><span class="arrow">→</span>
+    <span class="node checkedin">en casa</span><span class="arrow">→</span>
+    <span class="node checkedout">check-out</span>
+  </div>
+  <div class="flow-terminals">
+    <span class="lbl">Desde confirmada también puede terminar en:</span>
+    <span class="node cancelled">cancelada</span>
+    <span class="node noshow">no-show</span>
+  </div>
+  <ul>
+    <li>Los estados terminales (<b>check-out</b>, <b>cancelada</b>, <b>no-show</b>) ya no se pueden editar.</li>
+    <li>Cancelada y no-show <b>liberan la habitación</b>: desaparecen del calendario y no bloquean nuevas reservas.</li>
+    <li>Dos excepciones controladas: <b>Reactivar reserva</b> (solo gerencia/admin, cuando la cancelación fue del turno activo, el día no está auditado y la habitación sigue libre) y <b>Regularizar estancia</b> (cuando el huésped sí se hospedó y faltó registrar el check-in/check-out).</li>
+  </ul>
+
+  <h3>El detalle de la reservación</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/reservations/[id]</span></div>
+      <button type="button" class="shot-link" data-full="img/07-detalle-reserva.png" aria-label="Ampliar captura: Detalle de reservación con folio"><img src="img/07-detalle-reserva.png" alt="Detalle de reservación con folio" /></button>
+    </div>
+    <figcaption><b>Detalle completo.</b> Datos del huésped, fechas, política de precio, folio con cargos y pagos, y todas las acciones según tu rol.</figcaption>
+  </figure>
+
+  <p>El <b>folio</b> es la cuenta de la reservación: hospedaje (cargo automático al crear), cargos extra (minibar, servicios…), ajustes o descuentos, pagos, devoluciones y el saldo pendiente. Cada pago muestra su forma de pago y clasificación.</p>
+
+  <h4>Acciones principales</h4>
+  <ul>
+    <li><b>Editar datos</b>: corrige el nombre visible y las notas internas sin tocar folio, fechas ni importes.</li>
+    <li><b>Reprogramar / editar</b>: flujo de dos pasos con vista previa, advertencias, recálculo y motivo obligatorio.</li>
+    <li><b>Añadir noche</b>: para huéspedes en casa. Pide noches a agregar, monto manual y motivo; muestra vista previa de nueva salida, nuevo total y nuevo saldo, y crea un cargo de extensión separado (el hospedaje original no se reescribe).</li>
+    <li><b>Política de precio</b>: bloquea el total actual, fija un nuevo total bloqueado o regresa a tarifa automática. Siempre con motivo. El badge te dice si la reserva está en <em>Tarifa automática</em> o <em>Precio pactado bloqueado</em>.</li>
+    <li><b>Agregar cargo extra</b>: concepto, monto, categoría de ingreso y notas. La categoría solo clasifica para reportes gerenciales: no cambia el saldo.</li>
+    <li><b>Registrar pago</b>: monto, forma de pago, cuenta fuente y notas.</li>
+    <li><b>Marcar no-show</b>: solo en reservas confirmadas, con motivo. Conserva folio, pagos y anticipo intactos.</li>
+    <li><b>Void / devolución</b>: solo gerencia/admin (ver reglas más abajo).</li>
+    <li><b>Cambios operativos recientes</b>: al pie del detalle se listan reprogramaciones, extensiones y no-shows con quién, cuándo y por qué.</li>
+  </ul>
+
+  <div class="callout warn"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.5 18-8.2-14.2a1.5 1.5 0 0 0-2.6 0L2.5 18a1.5 1.5 0 0 0 1.3 2.2h16.4a1.5 1.5 0 0 0 1.3-2.2Z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg><div><b>Reglas de reprogramación segura:</b> con huésped en casa solo se cambia la habitación (no fechas ni datos); la habitación destino debe estar limpia y disponible, y la habitación origen queda marcada como sucia automáticamente. Reservas con check-out, canceladas o no-show no se reprograman.</div></div>
+
+  <h4>PDF de confirmación</h4>
+  <ul>
+    <li>Desde el detalle puedes descargar la confirmación en PDF: huésped, fechas, personas, total, anticipo/abonado y saldo (rojo si debe, verde si está liquidado).</li>
+    <li>El PDF <b>no muestra la habitación asignada</b> ni la nota física interna.</li>
+    <li>Si falta capturar el número de personas, el sistema bloquea la descarga hasta completarlo.</li>
+    <li>Los grupos tienen su propio PDF de confirmación con titular, fechas, habitaciones, total, abonado y saldo.</li>
+  </ul>
+
+  <h4>Cómo se clasifican los pagos</h4>
+  <ul>
+    <li><b>Depósito</b>: pago registrado antes del check-in.</li>
+    <li><b>Liquidación</b>: pago registrado durante o después de la estancia.</li>
+    <li>Estado financiero: <b>Pagada</b> (saldo $0), <b>Parcial</b> (hay pagos y queda saldo), <b>Sin pagar</b>.</li>
+  </ul>
+
+  <h4>Correcciones de pagos (void, devolución, ajuste)</h4>
+  <ul>
+    <li><b>Void</b> (anulación): mismo día de negocio, mientras el turno original siga abierto o reabierto.</li>
+    <li><b>Devolución (refund)</b>: cuando el turno original ya cerró; se registra en el turno abierto actual.</li>
+    <li><b>Ajuste</b>: positivo o negativo, nunca cero. Queda registrado quién lo aplicó.</li>
+    <li>Si el día ya fue auditado, la corrección se hace como <b>compensación enlazada</b> (solo gerencia/admin). Recepción no corrige días cerrados.</li>
+  </ul>
+
+  <h3>Historial de reservaciones</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/reservation-history</span></div>
+      <button type="button" class="shot-link" data-full="img/09-historial.png" aria-label="Ampliar captura: Historial de reservaciones"><img src="img/09-historial.png" alt="Historial de reservaciones" /></button>
+    </div>
+    <figcaption><b>Historial</b> <span class="route">/reservation-history</span>: búsqueda y consulta de reservas pasadas, actuales y futuras. Solo lectura.</figcaption>
+  </figure>
+  <ul>
+    <li>Busca por huésped, teléfono, número de reserva, habitación o notas.</li>
+    <li>Filtra por fechas (ventana inicial: 30 días atrás y 30 adelante), estado, canal, habitación, quién registró, forma de pago y monto.</li>
+    <li>Cada fila abre el detalle real de la reserva; el botón <span class="kbd">Volver</span> te regresa al historial.</li>
+  </ul>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<!-- ============================================================ 4 -->
+<section class="sec" id="tarifas">
+  <div class="sec-label">Sección 04</div>
+  <h2>Tarifas <span class="badge manager">GERENTE/ADMIN</span></h2>
+  <p class="lead">Las tarifas se gestionan en dos pantallas: el grid de tarifas por día <span class="route">/rates</span> y las reglas de temporada <span class="route">/rates/rules</span>.</p>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/rates</span></div>
+      <button type="button" class="shot-link" data-full="img/10-tarifas-grid.png" aria-label="Ampliar captura: Grid de tarifas"><img src="img/10-tarifas-grid.png" alt="Grid de tarifas" /></button>
+    </div>
+    <figcaption><b>Grid de tarifas.</b> 14 días visibles por tipo de habitación; cada celda es la tarifa de esa noche.</figcaption>
+  </figure>
+
+  <h3>Colores del grid</h3>
+  <div class="ratelegend">
+    <span class="item"><span class="sw none"></span> Sin color — tarifa base del tipo</span>
+    <span class="item"><span class="sw override"></span> Amarillo — override manual del día</span>
+    <span class="item"><span class="sw season"></span> Morado — regla de temporada activa</span>
+    <span class="item"><span class="sw local"></span> Azul — edición local sin guardar</span>
+  </div>
+
+  <h3>Operaciones del grid</h3>
+  <ul>
+    <li><b>Editar un día</b>: clic en la celda y escribe el precio. Eso crea un override manual para esa fecha.</li>
+    <li><b>Aplicación masiva</b>: escribe un monto y aplícalo a los 14 días visibles.</li>
+    <li><b>Limpiar overrides</b>: elimina los overrides del rango visible.</li>
+    <li><b>Guardar</b>: nada se aplica hasta que guardas.</li>
+  </ul>
+
+  <h3>Reglas de temporada</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/rates/rules</span></div>
+      <button type="button" class="shot-link" data-full="img/11-tarifas-reglas.png" aria-label="Ampliar captura: Reglas de precios por temporada"><img src="img/11-tarifas-reglas.png" alt="Reglas de precios por temporada" /></button>
+    </div>
+    <figcaption><b>Reglas de temporada.</b> Suben o bajan la tarifa base por porcentaje en un rango de fechas.</figcaption>
+  </figure>
+  <ol class="steps">
+    <li><b>Nueva regla</b>Nombre, fecha de inicio y fin.</li>
+    <li><b>Porcentaje</b>Ej. <span class="kbd">+20</span> sube 20%, <span class="kbd">-15</span> baja 15%.</li>
+    <li><b>Tipos afectados</b>Selecciona tipos de habitación o "Todos".</li>
+    <li><b>Prioridad</b>Si dos reglas chocan, gana la de número mayor.</li>
+  </ol>
+  <p>Cada regla se puede editar, eliminar o activar/desactivar.</p>
+
+  <h3>¿Cómo decide el sistema el precio de cada noche?</h3>
+  <div class="cascade">
+    <div class="lvl"><span class="prio">1</span><div><b>Override manual</b><span>Precio fijo capturado para esa fecha y tipo. Máxima prioridad.</span></div></div>
+    <div class="lvl"><span class="prio">2</span><div><b>Regla de temporada activa</b><span>Modifica la tarifa base por porcentaje.</span></div></div>
+    <div class="lvl"><span class="prio">3</span><div><b>Tarifa base del tipo</b><span>El precio por defecto definido en Configuración.</span></div></div>
+  </div>
+  <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div>Si una regla produce un precio fuera de los límites mínimo/máximo del tipo de habitación, el sistema lo ajusta automáticamente a ese límite.</div></div>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<!-- ============================================================ 5 -->
+<section class="sec" id="caja">
+  <div class="sec-label">Sección 05</div>
+  <h2>Caja y turnos</h2>
+  <p class="lead">Toda la operación de dinero del día vive dentro de un <b>turno</b> en <span class="route">/cash-register</span>. Sin turno abierto no se registran pagos, cargos ni movimientos de caja.</p>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/cash-register</span></div>
+      <button type="button" class="shot-link" data-full="img/12-caja.png" aria-label="Ampliar captura: Página de caja con turno abierto"><img src="img/12-caja.png" alt="Página de caja con turno abierto" /></button>
+    </div>
+    <figcaption><b>Caja y turnos.</b> Turno abierto con el efectivo esperado en vivo. El "contado" queda en $0 hasta que capturas el arqueo en el cierre.</figcaption>
+  </figure>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/cash-register</span></div>
+      <button type="button" class="shot-link" data-full="img/12b-caja-movimientos.png" aria-label="Ampliar captura: Flujo por método de pago y detalle del turno"><img src="img/12b-caja-movimientos.png" alt="Flujo por método de pago y detalle del turno" /></button>
+    </div>
+    <figcaption><b>Flujo por método y detalle del turno.</b> Ingresos, egresos y devoluciones separados por efectivo, tarjeta y transferencia.</figcaption>
+  </figure>
+
+  <h3>Abrir turno</h3>
+  <ol class="steps">
+    <li><b>Caja y monto</b>Captura el monto de apertura del turno.</li>
+    <li><b>Conteo físico</b>Cuenta el dinero por denominación: billetes de $1000, $500, $200, $100, $50 y $20; monedas de $20, $10, $5, $2, $1 y $0.50. El total del desglose <b>debe coincidir</b> con el monto de apertura o el sistema no te deja abrir.</li>
+    <li><b>Confirmar</b>El sistema asigna la fecha de negocio automáticamente (horario de México). Si el turno anterior fue cerrado, verás su desglose de cierre como referencia.</li>
+  </ol>
+  <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div>Solo puede haber <b>un turno abierto o reabierto por fecha de negocio</b>.</div></div>
+
+  <h3>Registrar ingresos y egresos operativos</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/cash-register</span></div>
+      <button type="button" class="shot-link" data-full="img/13-caja-movimiento.png" aria-label="Ampliar captura: Diálogo de ingreso/egreso operativo"><img src="img/13-caja-movimiento.png" alt="Diálogo de ingreso/egreso operativo" /></button>
+    </div>
+    <figcaption><b>Ingreso / egreso operativo</b> en tres pasos: tipo → monto y método → concepto y cuenta.</figcaption>
+  </figure>
+  <ol class="steps">
+    <li><b>Tipo</b>Elige <b>Ingreso</b> (entra dinero a caja) o <b>Egreso</b> (sale dinero).</li>
+    <li><b>Monto y método</b>Captura el monto y la forma de pago. En ingresos, elige también la <b>categoría de ingreso</b> (Restaurante, Minibar, Lavandería…).</li>
+    <li><b>Concepto y cuenta</b>Describe el movimiento y confirma de qué cuenta sale o a cuál entra (<b>Caja</b> o <b>Bancos</b>).</li>
+  </ol>
+  <div class="callout warn"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.5 18-8.2-14.2a1.5 1.5 0 0 0-2.6 0L2.5 18a1.5 1.5 0 0 0 1.3 2.2h16.4a1.5 1.5 0 0 0 1.3-2.2Z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg><div><b>Tarjeta y transferencia no son efectivo físico.</b> Se registran y aparecen en reportes igual que el efectivo, pero no entran ni salen de la gaveta: no alteran el efectivo esperado del arqueo.</div></div>
+  <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div><b>Cuenta contable vs. cuenta fuente:</b> la cuenta contable clasifica el <em>concepto</em> del movimiento; la cuenta fuente dice <em>de dónde sale o a dónde entra</em> el dinero (solo Caja o Bancos). En ingresos manuales, la granularidad (Restaurante, Minibar, Late checkout…) va en la <b>categoría de ingreso</b>, que no modifica caja ni saldos.</div></div>
+
+  <h3>Cancelar un movimiento manual del turno</h3>
+  <ul>
+    <li>Solo <b>gerencia/admin</b>, solo movimientos <b>manuales</b> del turno activo, con motivo obligatorio.</li>
+    <li>No aplica a pagos ligados a reservación, retiros de utilidad ni correcciones.</li>
+    <li>El movimiento original <b>no se borra</b>: queda visible como cancelado y el sistema crea un reverso enlazado en el mismo turno para que el corte cuadre. Verás ambas filas en caja.</li>
+    <li>Si el turno está en handoff pendiente o el día ya fue auditado, la cancelación queda bloqueada.</li>
+  </ul>
+
+  <h3>Corregir el método de pago de un movimiento</h3>
+  <p>Úsalo cuando el monto y la reserva son correctos pero la forma de pago fue otra. Ejemplo: capturaste un anticipo como efectivo y en realidad fue transferencia.</p>
+  <ol class="steps">
+    <li><b>Ubica el movimiento</b>En Caja, botón <span class="kbd">Corregir método</span> sobre el movimiento del turno actual.</li>
+    <li><b>Revisa y corrige</b>El sistema muestra el método actual y sugiere la cuenta compatible: Caja para efectivo, Bancos para tarjeta/transferencia. Si Banco está habilitado y el nuevo método es tarjeta o transferencia, selecciona la cuenta bancaria destino.</li>
+    <li><b>Motivo y confirmación</b>El motivo es obligatorio y todo queda en auditoría.</li>
+  </ol>
+  <ul>
+    <li>Solo cambia método, detalle y cuenta fuente — nunca monto, concepto, reserva, turno ni fecha.</li>
+    <li>Recepción corrige solo movimientos de su turno bajo su custodia; gerencia/admin pueden corregir los del turno activo aunque no sean custodios.</li>
+    <li>Al pasar de efectivo a tarjeta/transferencia, el movimiento sale del efectivo esperado del arqueo.</li>
+    <li>Si el turno cerró, está en handoff, el día fue auditado o el movimiento ya tiene una excepción, la corrección se bloquea.</li>
+  </ul>
+
+  <h3>Cierre de turno</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/cash-register</span></div>
+      <button type="button" class="shot-link" data-full="img/14-caja-cierre.png" aria-label="Ampliar captura: Diálogo de cierre de turno con arqueo"><img src="img/14-caja-cierre.png" alt="Diálogo de cierre de turno con arqueo" /></button>
+    </div>
+    <figcaption><b>Cierre con arqueo.</b> El total contado se calcula desde el desglose de billetes y monedas.</figcaption>
+  </figure>
+  <ol class="steps">
+    <li><b>Cuenta el efectivo físico</b>Y captura el arqueo por billetes y monedas; el total se calcula solo.</li>
+    <li><b>Folios físicos</b>Captura folio inicial y final de las hojas usadas en el turno.</li>
+    <li><b>Revisa el cálculo</b><b>Esperado</b> = apertura + ingresos en efectivo − egresos operativos en efectivo − retiros de utilidad − devoluciones en efectivo. <b>Diferencia</b> = contado − esperado.</li>
+    <li><b>Elige el destino</b><b>Cerrado</b> definitivo, o <b>handoff pendiente</b> seleccionando al usuario que recibirá el turno.</li>
+    <li><b>Confirma</b>Si hay diferencia, queda registrada para revisión.</li>
+  </ol>
+  <ul>
+    <li>Recepción puede hacer el cierre definitivo solo de su propio turno; gerencia/admin pueden cerrar turnos ajenos.</li>
+    <li>Los pagos con tarjeta y transferencia sí aparecen en el corte y los reportes por método, pero solo el <b>efectivo</b> altera el esperado del arqueo.</li>
+  </ul>
+
+  <h3>Handoff: transferir el turno</h3>
+  <ul>
+    <li>Transfiere la responsabilidad del turno sin cerrarlo. Siempre es <b>designado</b>: eliges al usuario destino.</li>
+    <li>También pide el arqueo por denominaciones, que debe cuadrar con el contado.</li>
+    <li>Mientras el turno está en <b>handoff pendiente</b>, nadie puede registrar pagos ni movimientos.</li>
+    <li>Solo el usuario destino (o gerencia/admin) puede aceptar; al aceptar, el turno vuelve a estar abierto con el nuevo custodio registrado.</li>
+  </ul>
+
+  <h3>Retiro de utilidad</h3>
+  <p>Para sacar efectivo de caja <b>sin</b> clasificarlo como gasto operativo (por ejemplo, retiro de la dueña o de contabilidad):</p>
+  <ul>
+    <li>Con turno abierto, botón <span class="kbd">Retiro de utilidad</span>, monto y notas opcionales.</li>
+    <li>Se descuenta del efectivo esperado y afecta el flujo neto, pero <b>no</b> entra a egresos operativos. Queda registrado quién y cuándo.</li>
+    <li>Si el monto excede el efectivo disponible del turno, el sistema lo bloquea.</li>
+  </ul>
+
+  <h3>Después del cierre del día</h3>
+  <ul>
+    <li>Mientras el día siga abierto (sin auditoría nocturna), se permiten correcciones normales según el rol.</li>
+    <li>Una vez <b>auditado</b> el día, nada se edita ni se borra: la corrección se hace con un <b>movimiento compensatorio enlazado</b>, solo gerencia/admin y con motivo.</li>
+    <li><b>Reabrir un turno cerrado</b> (gerencia/admin): el conteo se resetea y hay que volver a cerrar.</li>
+    <li><b>Reabrir un día auditado</b> es excepción: se hace desde Reportes, con motivo, y queda auditoría completa de quién, cuándo y por qué. Si el error se puede resolver con compensación, esa es la vía preferida.</li>
+  </ul>
+
+  <h3>Gastos pagados desde el banco (sin pasar por caja)</h3>
+  <div class="callout perm"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="10" x="5" y="11" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg><div>Solo <b>gerencia/admin</b>. Cuando se paga un gasto directamente desde la cuenta bancaria de la empresa, se registra en <span class="route">Finanzas &gt; Banco</span> — nunca por caja. No requiere turno, siempre usa cuenta fuente Bancos y no toca el efectivo esperado del cajero. El flujo antiguo de "egresos bancarios" quedó bloqueado; si Banco aún no está habilitado para captura en tu hotel, detén el registro y coordina con gerencia.</div></div>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<!-- ============================================================ 6 -->
+<section class="sec" id="housekeeping">
+  <div class="sec-label">Sección 06</div>
+  <h2>Housekeeping</h2>
+  <p class="lead">El tablero <span class="route">/housekeeping</span> muestra todas las habitaciones con su estado actual y contadores por estado.</p>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/housekeeping</span></div>
+      <button type="button" class="shot-link" data-full="img/15-housekeeping.png" aria-label="Ampliar captura: Tablero de housekeeping"><img src="img/15-housekeeping.png" alt="Tablero de housekeeping" /></button>
+    </div>
+    <figcaption><b>Housekeeping.</b> Contadores arriba y estado por habitación. Limpieza marca las sucias como limpias.</figcaption>
+  </figure>
+
+  <h3>Estados de habitación</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Estado</th><th>Significado</th></tr></thead>
+    <tbody>
+      <tr><td><b>Disponible</b></td><td>Lista para asignar a un huésped.</td></tr>
+      <tr><td><b>Ocupada</b></td><td>Huésped alojado actualmente.</td></tr>
+      <tr><td><b>Sucia</b></td><td>Necesita limpieza antes de poder usarse.</td></tr>
+      <tr><td><b>Mantenimiento</b></td><td>Fuera de servicio por reparación.</td></tr>
+      <tr><td><b>Bloqueada</b></td><td>Bloqueada por operación o mantenimiento.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <ul>
+    <li>Admin, gerencia y recepción cambian estados desde el detalle de la habitación.</li>
+    <li><b>Limpieza</b> solo usa <span class="kbd">Marcar limpia</span> sobre habitaciones sucias. Auditoría solo consulta.</li>
+    <li>Las habitaciones archivadas no aparecen: ya salieron del inventario operativo.</li>
+  </ul>
+
+  <h3>Bloqueos de habitación</h3>
+  <p>Un bloqueo impide asignar la habitación a reservaciones durante un periodo (mantenimiento, fumigación, uso interno…).</p>
+  <ol class="steps">
+    <li><b>Selecciona la habitación</b>Y elige el tipo de bloqueo: operacional o mantenimiento.</li>
+    <li><b>Define el rango de fechas</b>Y captura la razón y notas.</li>
+    <li><b>Guarda</b>La habitación deja de aparecer como disponible en ese rango.</li>
+  </ol>
+  <ul>
+    <li>Recepción solo crea bloqueos <b>operacionales</b>. Los de mantenimiento y la liberación de cualquier bloqueo son de gerencia/admin.</li>
+    <li>No se puede bloquear una habitación que ya tiene una reserva asignada en ese rango: primero resuelve la reserva.</li>
+  </ul>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<!-- ============================================================ 7 -->
+<section class="sec" id="clientes">
+  <div class="sec-label">Sección 07</div>
+  <h2>Clientes y asistente</h2>
+  <p class="lead">El directorio de clientes <span class="route">/customers</span> concentra huéspedes, clientes frecuentes y prospectos del hotel.</p>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/customers</span></div>
+      <button type="button" class="shot-link" data-full="img/16-clientes.png" aria-label="Ampliar captura: Lista de clientes"><img src="img/16-clientes.png" alt="Lista de clientes" /></button>
+    </div>
+    <figcaption><b>Clientes.</b> Busca por nombre, teléfono, WhatsApp, correo o código de cliente.</figcaption>
+  </figure>
+
+  <h3>Crear y editar clientes</h3>
+  <ul>
+    <li>Captura al menos nombre, teléfono, WhatsApp o correo. Puedes registrar ciudad, país, idioma, origen, preferencias, restricciones, alergias, consentimiento comercial y estado de seguimiento.</li>
+    <li>Recepción, gerencia y admin pueden editar lo básico del perfil.</li>
+  </ul>
+
+  <h3>El perfil del cliente</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/customers/[id]</span></div>
+      <button type="button" class="shot-link" data-full="img/17-cliente-perfil.png" aria-label="Ampliar captura: Perfil de cliente"><img src="img/17-cliente-perfil.png" alt="Perfil de cliente" /></button>
+    </div>
+    <figcaption><b>Perfil del cliente.</b> Pestañas de Resumen, Contacto, Historial, Seguimiento, Duplicados y Preferencias.</figcaption>
+  </figure>
+  <ul>
+    <li><b>Seguimiento</b>: recepción, gerencia y admin crean tareas, notas internas y resúmenes de contacto. Los eventos de campaña manual son de gerencia/admin.</li>
+    <li>Si el cliente está marcado <b>No contactar</b>, el sistema bloquea acciones con canal de contacto; las notas y tareas internas siguen disponibles.</li>
+    <li><b>Duplicados</b> (gerencia/admin): el sistema sugiere posibles duplicados por teléfono, WhatsApp o correo. La fusión siempre es manual, pide una razón, muestra vista previa y exige escribir el código del cliente que se conserva. Nada se borra físicamente.</li>
+    <li><b>Reportes CRM</b> <span class="route">/customers/reports</span>: vista agregada para gerencia, admin y auditoría con reservas, estancias, cargos, pagos y saldo por cliente.</li>
+  </ul>
+
+  <h3>Asistente interno <span class="route">/assistant</span></h3>
+  <p>Es un copiloto de <b>consulta</b> para admin, gerencia, recepción y auditoría. Puede responder sobre llegadas, salidas, huéspedes en casa, habitaciones sucias, ocupación, saldos pendientes, totales por forma de pago, reservas y clientes — según lo que tu rol puede ver.</p>
+  <div class="callout danger"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="m5.6 5.6 12.8 12.8" /></svg><div><b>El asistente no ejecuta acciones.</b> No crea ni modifica reservas, no registra pagos, no toca caja ni folios, no envía mensajes a huéspedes. Si le pides una acción, te dirá que por ahora solo consulta.</div></div>
+  <div class="callout warn"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.5 18-8.2-14.2a1.5 1.5 0 0 0-2.6 0L2.5 18a1.5 1.5 0 0 0 1.3 2.2h16.4a1.5 1.5 0 0 0 1.3-2.2Z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg><div>El asistente puede cometer errores. Para decisiones operativas, <b>confirma siempre en la pantalla oficial</b>: reservaciones, caja, reportes, housekeeping o calendario.</div></div>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<!-- ============================================================ 8 -->
+<section class="sec" id="reportes">
+  <div class="sec-label">Sección 08</div>
+  <h2>Reportes, balance y finanzas <span class="badge manager">GERENTE/ADMIN</span> <span class="badge auditor">AUDITOR LEE</span></h2>
+  <p class="lead">Todo vive en la pantalla <b>Finanzas</b> <span class="route">/finance</span>, organizada en pestañas: Resumen, Balance operativo, Reportes operativos, Banco, Costo por noche, Gastos, Cuentas por pagar, Pagos/reembolsos, Retiros y Catálogos. El filtro de periodo (Desde/Hasta) es global: se conserva al cambiar de pestaña.</p>
+
+  <h3>Reportes operativos</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/reports</span></div>
+      <button type="button" class="shot-link" data-full="img/18-reportes-resumen.png" aria-label="Ampliar captura: Resumen financiero"><img src="img/18-reportes-resumen.png" alt="Resumen financiero" /></button>
+    </div>
+    <figcaption><b>Resumen financiero.</b> KPIs del periodo (hospedaje, extras, anticipos, cobros, egresos, retiros, flujo neto, cuentas por cobrar) y tendencia diaria.</figcaption>
+  </figure>
+
+  <div class="cards">
+    <div class="card"><b class="t">📈 Resumen financiero</b><p>KPIs y gráfica del periodo. Si Banco está disponible, muestra una banda con total banco, efectivo operativo y liquidez total.</p></div>
+    <div class="card"><b class="t">📋 Transacciones</b><p>Todos los movimientos con filtros por fecha, método, cuenta fuente y búsqueda libre. Exporta a CSV.</p></div>
+    <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>Resumen de turnos</b><p>Por fecha: apertura, cierre, ingresos, egresos, esperado, contado, diferencia y encargado del turno.</p></div>
+    <div class="card"><b class="t">💳 Cuentas por cobrar</b><p>Reservas con saldo pendiente y la acción sugerida según su etapa (cobrar antes de llegada, liquidar antes de salida…).</p></div>
+    <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.8 6.8 0 0 0 8 8 8 8 0 1 1-8-8Z" /></svg>Cierres diarios</b><p>Resultado de cada auditoría nocturna: ocupación, llegadas, no-shows, ingresos, neto y quién cerró.</p></div>
+    <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3" /><circle cx="6" cy="18" r="3" /><path d="M20 4 8.1 15.9" /><path d="M14.5 14.5 20 20" /><path d="M8.1 8.1 12 12" /></svg>Corte por turno</b><p>El corte detallado para reemplazar el Excel operativo, exportable a XLSX.</p></div>
+    <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.5 18-8.2-14.2a1.5 1.5 0 0 0-2.6 0L2.5 18a1.5 1.5 0 0 0 1.3 2.2h16.4a1.5 1.5 0 0 0 1.3-2.2Z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg>Incidentes operativos</b><p>Alertas del día: auditoría fallida, diferencias de caja relevantes, intentos bloqueados sin turno.</p></div>
+  </div>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/reports?tab=transactions</span></div>
+      <button type="button" class="shot-link" data-full="img/19-reportes-transacciones.png" aria-label="Ampliar captura: Pestaña de transacciones"><img src="img/19-reportes-transacciones.png" alt="Pestaña de transacciones" /></button>
+    </div>
+    <figcaption><b>Transacciones.</b> Cada movimiento muestra concepto, reserva, categoría, método, cuenta fuente, impacto en efectivo y usuario.</figcaption>
+  </figure>
+
+  <h4>Corte por turno</h4>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/reports?tab=shift-cut</span></div>
+      <button type="button" class="shot-link" data-full="img/20-reportes-corte.png" aria-label="Ampliar captura: Corte por turno"><img src="img/20-reportes-corte.png" alt="Corte por turno" /></button>
+    </div>
+    <figcaption><b>Corte por turno.</b> Encabezado, ingresos, egresos, control de efectivo, totales por método, arqueos y diferencia.</figcaption>
+  </figure>
+  <ul>
+    <li>Modo <b>Por turno</b> (un turno exacto) o <b>Por día operativo</b> (todos los turnos de la misma fecha de negocio).</li>
+    <li><b>Esperado</b> y <b>Contado</b> son solo efectivo; tarjeta y transferencia se ven en el flujo sin inflar el efectivo.</li>
+    <li>Los movimientos históricos o fuera de turno aparecen en un bloque separado para no confundirse con la caja del cajero.</li>
+    <li>Exportable a <b>XLSX</b> para compartir o archivar.</li>
+  </ul>
+
+  <h4>Acciones administrativas desde Reportes</h4>
+  <ul>
+    <li>Ejecutar la <b>auditoría nocturna</b> (requiere que no haya turnos activos).</li>
+    <li><b>Reabrir un día auditado</b> con motivo obligatorio.</li>
+    <li><b>Corregir post-cierre</b> una transacción creando la compensación enlazada.</li>
+    <li><b>Anular un cobro de folio</b> desde la pestaña Transacciones con <span class="kbd">Anular cobro</span> (mismas reglas de void/devolución).</li>
+  </ul>
+
+  <h3>Balance</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/balance</span></div>
+      <button type="button" class="shot-link" data-full="img/21-balance.png" aria-label="Ampliar captura: Balance"><img src="img/21-balance.png" alt="Balance" /></button>
+    </div>
+    <figcaption><b>Balance.</b> Flujo neto del periodo al frente, columnas de ingresos y egresos, y resumen por método y cuenta fuente.</figcaption>
+  </figure>
+  <ul>
+    <li>Doble vista: <b>Folios</b> (hospedaje, extras, ajustes) y <b>Transacciones</b> (flujo de dinero).</li>
+    <li>La tarjeta <b>Flujo neto</b> es lo primero que ves: verde si es positivo, rojo si es negativo.</li>
+    <li>Chips de INGRESOS y EGRESOS con el desglose por línea (hospedaje, extras, anticipos, cobros, ingresos manuales, egresos operativos, retiros, devoluciones).</li>
+    <li>Filtros por rubro, cuenta, método, cuenta fuente, con/sin turno y búsqueda. El periodo (Desde/Hasta) es el filtro global compartido de Finanzas.</li>
+    <li>Exporta a CSV/XLSX con el periodo y filtros visibles.</li>
+  </ul>
+
+  <h3>Finanzas: gastos, cuentas por pagar y retiros</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/finance?tab=managerial</span></div>
+      <button type="button" class="shot-link" data-full="img/22-finanzas-gastos.png" aria-label="Ampliar captura: Finanzas"><img src="img/22-finanzas-gastos.png" alt="Finanzas" /></button>
+    </div>
+    <figcaption><b>Finanzas.</b> Captura supervisada de gastos reales, pagos a acreedores y retiros, con el periodo global arriba de las pestañas.</figcaption>
+  </figure>
+  <p>La captura en Finanzas es para <b>gerencia/admin en piloto supervisado</b>. Las reglas de oro:</p>
+  <ul>
+    <li><b>Gasto con tarjeta del dueño o gerente</b>: regístralo como gasto real con fuente externa; crea una cuenta por pagar y no baja caja.</li>
+    <li><b>Gasto desde la caja del hotel</b>: solo si tienes turno propio abierto y lo seleccionas. El movimiento también aparecerá en Caja y bajará el efectivo esperado.</li>
+    <li><b>Pago a tarjeta o acreedor</b>: regístralo como pago a acreedor — no como gasto nuevo ni retiro.</li>
+    <li><b>Retiro real del dueño</b>: como retiro de utilidad, solo cuando el dinero sale para el dueño y no paga deudas.</li>
+    <li>El selector <b>Asignación para costo</b> de los gastos queda por defecto en "General del hotel"; cámbialo a una habitación o tipo solo cuando el gasto deba alimentar el Costo por noche.</li>
+    <li>Si una salida combina pago a acreedor y retiro, o tienes duda, <b>detén la captura y consulta</b> con gerencia.</li>
+  </ul>
+
+  <h3>Costo por noche</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/finance?tab=costing</span></div>
+      <button type="button" class="shot-link" data-full="img/23-costo-noche.png" aria-label="Ampliar captura: Costo por noche"><img src="img/23-costo-noche.png" alt="Costo por noche" /></button>
+    </div>
+    <figcaption><b>Costo por noche</b> (solo lectura, gerencial): costo por noche vendible, ocupada y física, con desglose por tipo y habitación.</figcaption>
+  </figure>
+  <ul>
+    <li>Es costeo operativo gerencial basado en gastos reales y ocupación. <b>No es contabilidad fiscal</b> y no mueve caja, banco ni folios.</li>
+    <li>Para que un gasto se asigne a una habitación o tipo, debe capturarse con esa asignación en Finanzas; los demás se reparten como gasto general.</li>
+    <li>El margen aparece como <em>Pendiente</em>: los costos ya son útiles para lectura gerencial, el margen llegará después.</li>
+    <li>Los costos excluidos se listan con su razón y contexto para que los ubiques en Finanzas o Banco.</li>
+  </ul>
+
+  <h3>Banco</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/finance?tab=bank</span></div>
+      <button type="button" class="shot-link" data-full="img/24-banco.png" aria-label="Ampliar captura: Módulo de banco"><img src="img/24-banco.png" alt="Módulo de banco" /></button>
+    </div>
+    <figcaption><b>Banco.</b> Cuentas y movimientos bancarios separados del efectivo de caja, con exportación CSV/XLSX. Las cuentas las crea gerencia/admin cuando el hotel está listo.</figcaption>
+  </figure>
+  <ul>
+    <li>Visible para gerencia, admin y auditoría. Recepción ve nombres de cuentas al cobrar (nunca saldos).</li>
+    <li>Acciones bancarias: gasto, pago a acreedor, retiro de utilidad, comisión, ajuste o transferencia — siempre con cuenta bancaria real y fecha operativa.</li>
+    <li>Los movimientos bancarios <b>no entran al corte del cajero</b> ni alteran el efectivo esperado.</li>
+  </ul>
+
+  <h3>Historial del hotel archivado</h3>
+  <p>Si tu hotel tiene un archivo histórico de años anteriores, vive en <span class="route">/reports/history</span> con dos pestañas: <b>Reservaciones</b> (consulta global de estancias pasadas) y <b>Finanzas</b> (resumen anual/mensual de archivo). Es solo de consulta: ahí no se opera nada.</p>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<!-- ============================================================ 9 -->
+<section class="sec" id="configuracion">
+  <div class="sec-label">Sección 09</div>
+  <h2>Configuración <span class="badge manager">GERENTE/ADMIN</span></h2>
+  <p class="lead">En <span class="route">/settings</span> se administra el inventario de habitaciones, los tipos, los catálogos gerenciales y el equipo.</p>
+
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/settings?tab=inventory</span></div>
+      <button type="button" class="shot-link" data-full="img/25-settings-habitaciones.png" aria-label="Ampliar captura: Configuración de habitaciones"><img src="img/25-settings-habitaciones.png" alt="Configuración de habitaciones" /></button>
+    </div>
+    <figcaption><b>Habitaciones y tipos.</b> Número, piso, tipo, capacidad, tarifas base y límites.</figcaption>
+  </figure>
+
+  <h3>Habitaciones</h3>
+  <ul>
+    <li>Se crean con número, piso, tipo y notas.</li>
+    <li>Si una habitación ya tuvo reservas o bloqueos, <b>no se borra</b>: se <b>archiva</b>. Una habitación archivada no acepta reservas nuevas ni aparece en el inventario, pero conserva todo su historial.</li>
+    <li>Después del primer uso, el número y el tipo quedan bloqueados para no romper el historial; piso y notas sí se pueden editar.</li>
+  </ul>
+
+  <h3>Tipos de habitación</h3>
+  <ul>
+    <li>Nombre, capacidad, tarifa base y tarifas mínima/máxima opcionales (limitan automáticamente lo que pueden hacer las reglas de temporada).</li>
+    <li>Si un tipo ya tuvo uso, su nombre queda bloqueado. Un tipo archivado deja de ofrecerse, pero sigue resolviendo el historial.</li>
+  </ul>
+
+  <h3>Cuentas operativas</h3>
+  <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div>Las cuentas contables internas (<b>Caja, Bancos, Hospedaje, Anticipos de huéspedes, Retiro de utilidad, Ingreso manual, Egreso manual</b>) las mantiene el sistema automáticamente. <b>No se editan desde Configuración.</b> Los conceptos humanos van en el campo Concepto/Notas de cada movimiento y la granularidad gerencial vive en los catálogos de Finanzas.</div></div>
+
+  <h3>Finanzas gerenciales (catálogos)</h3>
+  <ul>
+    <li>Terceros/parties, fuentes de pago, cuentas acreedoras y categorías se administran en <span class="route">Settings &gt; Finanzas gerenciales</span>.</li>
+    <li><b>Categorías de ingresos</b> (Restaurante, Minibar, Lavandería, Late checkout, Mascotas, Daños, Otros ingresos): gerencia/admin crea, edita, archiva con motivo y reactiva. <em>Hospedaje</em> y <em>Otros ingresos</em> son del sistema y no se tocan.</li>
+    <li>Estas categorías clasifican cargos extra e ingresos manuales en Balance, Caja, Reportes y exportaciones — sin cambiar saldos ni totales.</li>
+    <li>No hay borrado físico de catálogos: usa <b>Archivar</b> y <b>Reactivar</b> para conservar la auditoría.</li>
+  </ul>
+
+  <h3>Equipo y roles</h3>
+  <figure class="shot">
+    <div class="browser-shot">
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/settings?tab=team</span></div>
+      <button type="button" class="shot-link" data-full="img/26-settings-equipo.png" aria-label="Ampliar captura: Equipo y roles"><img src="img/26-settings-equipo.png" alt="Equipo y roles" /></button>
+    </div>
+    <figcaption><b>Equipo.</b> Altas, roles y acceso de los usuarios del hotel.</figcaption>
+  </figure>
+  <ul>
+    <li><b>Admin</b> crea usuarios completos, los desactiva (sin borrarlos), cambia correos y contraseñas, y asigna cualquier rol.</li>
+    <li><b>Gerente</b> solo cambia roles operativos entre Recepción, Auditor y Limpieza. No crea usuarios ni toca roles altos.</li>
+    <li>Nadie puede cambiar su propio rol, y el sistema impide dejar al hotel sin ningún admin activo.</li>
+    <li>Las contraseñas nunca se muestran ni quedan guardadas en la auditoría.</li>
+  </ul>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<!-- ============================================================ 10 -->
+<section class="sec" id="faq">
+  <div class="sec-label">Sección 10</div>
+  <h2>Preguntas frecuentes</h2>
+
+  <details class="faq"><summary>No puedo crear una reservación</summary><div class="a"><p>Verifica que haya un turno operativo <b>bajo tu custodia</b> en Caja. Si el turno está en handoff pendiente, pertenece a otro usuario o no hay turno activo, el sistema bloquea la creación. Así todo movimiento (incluyendo anticipos) queda registrado en un turno.</p></div></details>
+
+  <details class="faq"><summary>No puedo registrar un pago, cargo o movimiento de caja</summary><div class="a"><p>Misma causa: necesitas un turno abierto o reabierto bajo tu custodia. Revisa la página de Caja.</p></div></details>
+
+  <details class="faq"><summary>No puedo hacer check-in</summary><div class="a"><p>La reserva debe estar <b>confirmada</b>, tener <b>habitación asignada</b> y su fecha de entrada debe ser <b>hoy</b>. Si el huésped llegó antes, primero mueve la reserva a hoy (Calendario o Reprogramar) y luego haz check-in.</p></div></details>
+
+  <details class="faq"><summary>No puedo aceptar un handoff</summary><div class="a"><p>Solo el usuario designado como destino del handoff (o gerencia/admin) puede tomar la custodia del turno pendiente.</p></div></details>
+
+  <details class="faq"><summary>No puedo cerrar definitivamente mi turno</summary><div class="a"><p>Recepción solo cierra el turno que está bajo su custodia actual. Si el turno es de otra persona o sigue en handoff pendiente, primero debe aceptarse o regularizarse.</p></div></details>
+
+  <details class="faq"><summary>Registré algo con tarjeta o transferencia y no veo efectivo extra en el cierre</summary><div class="a"><p>Es correcto. Tarjeta y transferencia cuentan en folios, transacciones, balance y reportes por método, pero <b>no aumentan el efectivo esperado</b> del arqueo: ese dinero no está en la gaveta.</p></div></details>
+
+  <details class="faq"><summary>Capturé un anticipo como efectivo, pero en realidad fue transferencia</summary><div class="a"><p>Si el turno sigue abierto y bajo tu custodia: Caja → ubica el movimiento → <b>Corregir método</b> → cambia a transferencia, confirma la cuenta Bancos (y la cuenta bancaria destino si aplica) y captura el motivo. Si el turno ya cerró o el día fue auditado, no uses este flujo: pide a gerencia una corrección post-cierre.</p></div></details>
+
+  <details class="faq"><summary>Capturé un pago duplicado por error</summary><div class="a"><p>No edites ni borres el pago original. Si el turno original sigue abierto (o se reabre), corrige con <b>void</b> para que la anulación quede en el mismo turno. Si ese turno ya cerró, usa <b>devolución</b> desde el turno actual. Ambas dejan rastro en folio, balance y auditoría.</p></div></details>
+
+  <details class="faq"><summary>Necesito corregir un error de un día ya auditado</summary><div class="a"><p>El movimiento original no se toca. Gerencia/admin crean una <b>corrección post-cierre</b> (movimiento compensatorio enlazado) con motivo obligatorio. Reabrir el día auditado se reserva para excepciones.</p></div></details>
+
+  <details class="faq"><summary>¿Cómo ejecuto la auditoría nocturna o reabro un día?</summary><div class="a"><p>Desde <b>Reportes</b> con cuenta de gerencia/admin. La auditoría requiere que no haya turnos activos. Reabrir un día exige motivo y queda registrado con usuario, fecha y razón.</p></div></details>
+
+  <details class="faq"><summary>La tarifa de la reserva no coincide con lo esperado</summary><div class="a"><p>Primero revisa el badge de la reserva: si está en <b>Precio pactado bloqueado</b>, el total acordado se respeta aunque el sistema calcule otro. Si está en <b>Tarifa automática</b>, revisa la cascada: un override manual gana a la regla de temporada, y la regla gana a la tarifa base. Ve a Tarifas para ver qué aplica cada día.</p></div></details>
+
+  <details class="faq"><summary>Error: "Las reservaciones terminales no se pueden editar"</summary><div class="a"><p>Las reservas en check-out, canceladas o no-show son terminales: ya no se modifican. Si una cancelada debe revivir, gerencia/admin pueden usar <b>Reactivar reserva</b> cuando es elegible.</p></div></details>
+
+  <details class="faq"><summary>Hay una diferencia en el cierre de turno</summary><div class="a"><p>La diferencia es contado menos esperado. Egresos en efectivo, retiros de utilidad y devoluciones en efectivo ya se descuentan automáticamente del esperado. El faltante o sobrante queda registrado en el reporte de turnos y en el corte para revisión.</p></div></details>
+
+  <details class="faq"><summary>Veo movimientos en Balance que no salen en el corte por turno</summary><div class="a"><p>Seguramente son movimientos históricos importados o registrados fuera de turno (como movimientos bancarios gerenciales). El balance global los muestra; el corte operativo solo incluye lo ligado al turno seleccionado.</p></div></details>
+
+  <details class="faq"><summary>¿Cómo saco dinero de caja como gasto operativo?</summary><div class="a"><p>Caja → <b>Ingreso / egreso operativo</b> → dirección <b>Egreso</b> → forma de pago efectivo, concepto y cuenta de gasto → cuenta fuente Caja. Ese movimiento sí cuenta como egreso operativo y baja el efectivo esperado.</p></div></details>
+
+  <details class="faq"><summary>¿Cómo hago un retiro de utilidad?</summary><div class="a"><p>Con turno abierto, botón <b>Retiro de utilidad</b> en Caja, monto y notas. Se registra como categoría separada (no es egreso operativo ni devolución) y se resta del efectivo esperado. Si excede el efectivo del turno, se bloquea.</p></div></details>
+
+  <details class="faq"><summary>¿Cómo exporto el corte por turno?</summary><div class="a"><p>Reportes → pestaña <b>Corte por turno</b> → elige modo Por turno o Por día operativo → selecciona el turno o la fecha → <b>Exportar XLSX</b>.</p></div></details>
+
+  <details class="faq"><summary>Una habitación no aparece como disponible</summary><div class="a"><p>Revisa en Housekeeping si está sucia, en mantenimiento o bloqueada, y si tiene un bloqueo activo para esas fechas.</p></div></details>
+
+  <details class="faq"><summary>No puedo registrar un gasto bancario gerencial</summary><div class="a"><p>El flujo antiguo quedó bloqueado. Los gastos pagados desde el banco se registran en <b>Finanzas → Banco</b> (gerencia/admin). Si Banco aún no está habilitado para captura en tu hotel, detén el registro y coordina con gerencia.</p></div></details>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<!-- ============================================================ 11 -->
+<section class="sec" id="glosario">
+  <div class="sec-label">Sección 11</div>
+  <h2>Glosario</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th style="width:220px">Término</th><th>Definición</th></tr></thead>
+    <tbody>
+      <tr><td><b>Fecha de negocio</b></td><td>Fecha operativa del hotel (horario de México). Puede diferir de la fecha del servidor o del reloj de tu equipo.</td></tr>
+      <tr><td><b>Turno</b></td><td>Periodo de operación de caja: apertura, movimientos y cierre.</td></tr>
+      <tr><td><b>Folio</b></td><td>La cuenta de una reservación: cargos, pagos y saldo.</td></tr>
+      <tr><td><b>Anticipo / Depósito</b></td><td>Pago registrado antes del check-in.</td></tr>
+      <tr><td><b>Liquidación</b></td><td>Pago registrado durante o después de la estancia.</td></tr>
+      <tr><td><b>Override</b></td><td>Tarifa manual fija para un día y tipo de habitación. Máxima prioridad.</td></tr>
+      <tr><td><b>Regla de temporada</b></td><td>Modificador porcentual sobre la tarifa base para un rango de fechas.</td></tr>
+      <tr><td><b>Cascada de precios</b></td><td>Orden de prioridad: override → regla de temporada → tarifa base.</td></tr>
+      <tr><td><b>Precio pactado bloqueado</b></td><td>Política que conserva un total fijo acordado con el huésped, aunque el recálculo automático sugiera otro, hasta que un rol autorizado la cambie.</td></tr>
+      <tr><td><b>Handoff</b></td><td>Transferencia designada del turno al siguiente usuario; requiere aceptación explícita.</td></tr>
+      <tr><td><b>Esperado</b></td><td>Efectivo que debería haber en la gaveta al cierre: apertura + ingresos en efectivo − egresos en efectivo − retiros − devoluciones en efectivo.</td></tr>
+      <tr><td><b>Diferencia</b></td><td>Contado − esperado. Faltante o sobrante del arqueo.</td></tr>
+      <tr><td><b>Corrección post-cierre</b></td><td>Movimiento compensatorio trazable que corrige un error después de la auditoría nocturna.</td></tr>
+      <tr><td><b>Void</b></td><td>Anulación de un pago el mismo día de negocio, con el turno original aún abierto.</td></tr>
+      <tr><td><b>Devolución (refund)</b></td><td>Anulación registrada en el turno actual cuando el turno original ya cerró.</td></tr>
+      <tr><td><b>Ajuste de folio</b></td><td>Modificación de precio (positiva o negativa) con registro de quién la aplicó.</td></tr>
+      <tr><td><b>Retiro de utilidad</b></td><td>Salida de caja no operativa. Baja el efectivo esperado y el flujo neto, pero no cuenta como egreso operativo.</td></tr>
+      <tr><td><b>No-show</b></td><td>Huésped con reservación que no se presentó. Se marca manualmente con motivo.</td></tr>
+      <tr><td><b>Regularizar estancia</b></td><td>Cierre manual de una reserva vencida donde el huésped sí se hospedó pero faltó registrar check-in/check-out. No mueve dinero.</td></tr>
+      <tr><td><b>Bloqueo</b></td><td>Periodo en que una habitación no puede asignarse (operación o mantenimiento).</td></tr>
+      <tr><td><b>Walk-in</b></td><td>Huésped que llega sin reserva previa. El sistema lo registra como canal Directo.</td></tr>
+      <tr><td><b>Movimiento fuera de turno</b></td><td>Transacción visible en balance y reportes que no pertenece a ningún turno; no entra al corte del cajero.</td></tr>
+      <tr><td><b>Cuenta fuente</b></td><td>De dónde sale o a dónde entra el dinero: Caja o Bancos.</td></tr>
+      <tr><td><b>Categoría de ingreso</b></td><td>Clasificación gerencial de un ingreso (Restaurante, Minibar…). No cambia caja ni saldos.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:13px;color:var(--stone)">Los reportes, el balance y el detalle de reservación muestran la fecha y hora exacta de cada movimiento. La fecha de negocio sigue visible como referencia operativa, pero no sustituye al momento real del evento.</p>
+  <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
+</section>
+
+<footer style="border-top:1px solid var(--border); padding-top:22px; font-size:12.5px; color:var(--stone); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+  <span>Manual Operativo · <b style="color:var(--ink)">Virtualia PMS</b></span>
+  <span>Las capturas provienen de un hotel de demostración con datos ficticios.</span>
+</footer>
+
+</main>
+
+<aside class="page-index" aria-label="En esta página">
+  <div class="page-index__label">En esta página</div>
+  <nav id="pageIndex"></nav>
+</aside>
+</div>
+
+<div class="lightbox" id="shot-lightbox" role="dialog" aria-modal="true" aria-label="Captura ampliada" hidden>
+  <button class="lightbox__close" type="button" aria-label="Cerrar captura">
+    <svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  </button>
+  <figure class="lightbox__frame">
+    <img alt="" />
+    <figcaption class="lightbox__caption"></figcaption>
+  </figure>
+</div>
+
+<script>
+(function () {
+  var sectionLinks = document.querySelectorAll("nav.toc a");
+  var sectionMap = {};
+  var sections = Array.prototype.slice.call(document.querySelectorAll("section.sec"));
+  var pageIndex = document.getElementById("pageIndex");
+  var activeSectionId = null;
+  var activeHeadingId = null;
+  var currentHeadings = [];
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  sectionLinks.forEach(function (link) {
+    sectionMap[link.getAttribute("href").slice(1)] = link;
+  });
+
+  function slugify(text) {
+    return text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "seccion";
+  }
+
+  function assignHeadingIds() {
+    var used = {};
+    sections.forEach(function (section) {
+      section.querySelectorAll("h3").forEach(function (heading) {
+        if (!heading.id) {
+          var base = section.id + "-" + slugify(heading.textContent);
+          var id = base;
+          var index = 2;
+          while (used[id] || document.getElementById(id)) {
+            id = base + "-" + index;
+            index += 1;
+          }
+          heading.id = id;
+        }
+        used[heading.id] = true;
+      });
+    });
+  }
+
+  function setHeadingActive(id) {
+    if (activeHeadingId === id) return;
+    activeHeadingId = id;
+    if (!pageIndex) return;
+    pageIndex.querySelectorAll("a").forEach(function (link) {
+      link.classList.toggle("is-active", link.getAttribute("href") === "#" + id);
+    });
+  }
+
+  function updateHeadingByScroll() {
+    if (!currentHeadings.length) return;
+    var marker = window.scrollY + Math.min(window.innerHeight * .56, 560);
+    var current = currentHeadings[0];
+    currentHeadings.forEach(function (heading) {
+      var top = heading.getBoundingClientRect().top + window.scrollY;
+      if (top <= marker) current = heading;
+    });
+    setHeadingActive(current.id);
+  }
+
+  function rebuildPageIndex(section) {
+    if (!pageIndex) return;
+    pageIndex.replaceChildren();
+    activeHeadingId = null;
+    currentHeadings = [];
+
+    var headings = Array.prototype.slice.call(section.querySelectorAll("h3"));
+    if (!headings.length) {
+      var empty = document.createElement("span");
+      empty.className = "page-index__empty";
+      empty.textContent = "Sin subsecciones";
+      pageIndex.appendChild(empty);
+      return;
+    }
+
+    headings.forEach(function (heading) {
+      var link = document.createElement("a");
+      link.href = "#" + heading.id;
+      link.textContent = heading.textContent.trim();
+      pageIndex.appendChild(link);
+    });
+
+    currentHeadings = headings;
+    updateHeadingByScroll();
+  }
+
+  function setSectionActive(id) {
+    if (activeSectionId === id) return;
+    activeSectionId = id;
+    sectionLinks.forEach(function (link) { link.classList.remove("active"); });
+    if (sectionMap[id]) sectionMap[id].classList.add("active");
+    var section = document.getElementById(id);
+    if (section) rebuildPageIndex(section);
+  }
+
+  assignHeadingIds();
+
+  function updateActiveByScroll() {
+    if (!sections.length) return;
+    var marker = window.scrollY + Math.min(window.innerHeight * .24, 260);
+    var current = sections[0];
+    sections.forEach(function (section) {
+      var top = section.getBoundingClientRect().top + window.scrollY;
+      if (top <= marker) current = section;
+    });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8) {
+      current = sections[sections.length - 1];
+    }
+    setSectionActive(current.id);
+    updateHeadingByScroll();
+  }
+
+  var sectionTicking = false;
+  function requestSectionUpdate() {
+    if (sectionTicking) return;
+    sectionTicking = true;
+    window.requestAnimationFrame(function () {
+      sectionTicking = false;
+      updateActiveByScroll();
+    });
+  }
+
+  window.addEventListener("scroll", requestSectionUpdate, { passive: true });
+  window.addEventListener("resize", requestSectionUpdate);
+  updateActiveByScroll();
+
+  if (!reduceMotion) {
+    document.body.classList.add("motion-ready");
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: .08 });
+    sections.forEach(function (section) { revealObserver.observe(section); });
+  } else {
+    sections.forEach(function (section) { section.classList.add("is-visible"); });
+  }
+
+  var lightbox = document.getElementById("shot-lightbox");
+  if (!lightbox) return;
+  var lightboxImage = lightbox.querySelector("img");
+  var lightboxCaption = lightbox.querySelector(".lightbox__caption");
+  var closeButton = lightbox.querySelector(".lightbox__close");
+  var lastTrigger = null;
+
+  function openLightbox(trigger) {
+    var image = trigger.querySelector("img");
+    var caption = trigger.closest("figure").querySelector("figcaption");
+    lastTrigger = trigger;
+    lightboxImage.src = trigger.dataset.full || image.src;
+    lightboxImage.alt = image.alt || "";
+    lightboxCaption.innerHTML = caption ? caption.innerHTML : "";
+    lightbox.hidden = false;
+    document.body.classList.add("lightbox-open");
+    window.requestAnimationFrame(function () {
+      lightbox.classList.add("is-open");
+      closeButton.focus();
+    });
+  }
+
+  function closeLightbox() {
+    if (lightbox.hidden) return;
+    lightbox.classList.remove("is-open");
+    document.body.classList.remove("lightbox-open");
+    window.setTimeout(function () {
+      lightbox.hidden = true;
+      lightboxImage.removeAttribute("src");
+      lightboxCaption.textContent = "";
+      if (lastTrigger) lastTrigger.focus();
+    }, 180);
+  }
+
+  document.querySelectorAll(".shot-link").forEach(function (button) {
+    button.addEventListener("click", function () { openLightbox(button); });
+  });
+  closeButton.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", function (event) {
+    if (event.target === lightbox) closeLightbox();
+  });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") closeLightbox();
+  });
+})();
+</script>
+</body>
+</html>
