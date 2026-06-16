@@ -776,7 +776,7 @@ details.faq .a p { margin-bottom: 8px; }
   <h3>Acciones rápidas desde el Front Desk</h3>
   <ul>
     <li><b>Asignar habitación</b>: en la tarjeta de la reservación, elige una habitación disponible del menú.</li>
-    <li><b>Registrar pago</b>: abre el diálogo de pago, captura monto, forma de pago (efectivo, tarjeta de débito/crédito, transferencia, MercadoPago, PayPal…), revisa la cuenta fuente sugerida (<b>Caja</b> o <b>Bancos</b>) y agrega notas si quieres. Requiere turno abierto.</li>
+    <li><b>Registrar pago</b>: abre el diálogo de pago, captura monto, detalle de pago y notas opcionales. La UI muestra la fuente operativa en solo lectura: <b>Efectivo → Caja</b> o <b>Tarjeta/Transferencia → Bancos</b>. Si el método real es tarjeta o transferencia, selecciona la cuenta bancaria destino cuando el sistema la pida; recepción ve nombres de cuentas, no saldos. Cuando no haya cuentas bancarias configuradas, detén la captura y pide a gerencia/admin configurar <span class="route">Finanzas &gt; Banco</span>. Requiere turno abierto o reabierto.</li>
     <li><b>Check-in</b>: la reserva debe estar <b>confirmada</b>, tener <b>habitación asignada</b> y su fecha de entrada debe ser <b>hoy</b>.</li>
     <li><b>Check-out</b>: verifica antes que el saldo esté en cero.</li>
     <li><b>No-show manual</b>: para reservas confirmadas que nunca llegaron. Pide un motivo y conserva folio, pagos y anticipos tal como estaban.</li>
@@ -831,7 +831,7 @@ details.faq .a p { margin-bottom: 8px; }
     <li><b>Abre el formulario</b>Haz clic en una celda vacía del calendario o en el botón <span class="kbd">Nueva reserva</span>.</li>
     <li><b>Captura al huésped</b>Nombre (obligatorio), número de personas, teléfono y canal (directo, teléfono, Booking o Expedia). Si es Booking/Expedia puedes capturar el número de reserva de la OTA.</li>
     <li><b>Elige fechas y habitación</b>Fechas de entrada y salida, tipo de habitación y habitación. Solo aparecen habitaciones disponibles.</li>
-    <li><b>Revisa precio y anticipo</b>El sistema calcula "N noches × $X/noche" y pre-llena el total; puedes modificarlo (queda advertencia del precio estimado original). Si el huésped deja anticipo, captura monto y forma de pago; con $0 no se pide método. El anticipo entra como depósito a tu turno.</li>
+    <li><b>Revisa precio y anticipo</b>El sistema calcula "N noches × $X/noche" y pre-llena el total; puedes modificarlo (queda advertencia del precio estimado original). Si el huésped deja anticipo mayor a $0, captúralo como <b>Monto recibido ahora</b>, elige forma de pago y revisa la fuente operativa en solo lectura: <b>Efectivo → Caja</b> o <b>Tarjeta/Transferencia → Bancos</b>. Para tarjeta o transferencia debe existir una cuenta bancaria destino seleccionada o resuelta por default; cuando no haya cuentas bancarias configuradas, no registres el anticipo no-cash hasta configurar <span class="route">Finanzas &gt; Banco</span>. Con $0 no hace falta método ni cuenta bancaria. El anticipo queda como depósito en el turno activo.</li>
     <li><b>Confirma</b>La reserva queda creada y visible en el calendario y el Front Desk.</li>
   </ol>
 
@@ -840,7 +840,7 @@ details.faq .a p { margin-bottom: 8px; }
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/calendar</span></div>
       <button type="button" class="shot-link" data-full="img/06-nueva-reserva.png" aria-label="Ampliar captura: Formulario de nueva reserva"><img src="img/06-nueva-reserva.png" alt="Formulario de nueva reserva" /></button>
     </div>
-    <figcaption><b>Nueva reserva</b> en tres pasos: huésped → fechas y habitación → precio y anticipo.</figcaption>
+    <figcaption><b>Nueva reserva</b> en tres pasos: huésped → fechas y habitación → precio y monto recibido ahora.</figcaption>
   </figure>
 
   <h3>Crear una reserva grupal</h3>
@@ -919,7 +919,7 @@ details.faq .a p { margin-bottom: 8px; }
     <li><b>Añadir noche</b>: para huéspedes en casa. Pide noches a agregar, monto manual y motivo; muestra vista previa de nueva salida, nuevo total y nuevo saldo, y crea un cargo de extensión separado (el hospedaje original no se reescribe).</li>
     <li><b>Política de precio</b>: bloquea el total actual, fija un nuevo total bloqueado o regresa a tarifa automática. Siempre con motivo. El badge te dice si la reserva está en <em>Tarifa automática</em> o <em>Precio pactado bloqueado</em>.</li>
     <li><b>Agregar cargo extra</b>: concepto, monto, categoría de ingreso y notas. La categoría solo clasifica para reportes gerenciales: no cambia el saldo.</li>
-    <li><b>Registrar pago</b>: monto, forma de pago, cuenta fuente y notas.</li>
+    <li><b>Registrar pago</b>: monto, detalle de pago, fuente operativa solo lectura (<b>Caja</b>/<b>Bancos</b>), cuenta bancaria destino solo para tarjeta/transferencia y notas. Requiere turno abierto o reabierto.</li>
     <li><b>Marcar no-show</b>: solo en reservas confirmadas, con motivo. Conserva folio, pagos y anticipo intactos.</li>
     <li><b>Void / devolución</b>: solo gerencia/admin (ver reglas más abajo).</li>
     <li><b>Cambios operativos recientes</b>: al pie del detalle se listan reprogramaciones, extensiones y no-shows con quién, cuándo y por qué.</li>
@@ -1033,7 +1033,7 @@ details.faq .a p { margin-bottom: 8px; }
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/cash-register</span></div>
       <button type="button" class="shot-link" data-full="img/12-caja.png" aria-label="Ampliar captura: Página de caja con turno abierto"><img src="img/12-caja.png" alt="Página de caja con turno abierto" /></button>
     </div>
-    <figcaption><b>Caja y turnos.</b> Turno abierto con el efectivo esperado en vivo. El "contado" queda en $0 hasta que capturas el arqueo en el cierre.</figcaption>
+    <figcaption><b>Caja y turnos.</b> Turno abierto con el efectivo esperado en vivo. El conteo físico se captura al cierre o handoff.</figcaption>
   </figure>
 
   <figure class="shot">
@@ -1046,9 +1046,9 @@ details.faq .a p { margin-bottom: 8px; }
 
   <h3>Abrir turno</h3>
   <ol class="steps">
-    <li><b>Caja y monto</b>Captura el monto de apertura del turno.</li>
-    <li><b>Conteo físico</b>Cuenta el dinero por denominación: billetes de $1000, $500, $200, $100, $50 y $20; monedas de $20, $10, $5, $2, $1 y $0.50. El total del desglose <b>debe coincidir</b> con el monto de apertura o el sistema no te deja abrir.</li>
-    <li><b>Confirmar</b>El sistema asigna la fecha de negocio automáticamente (horario de México). Si el turno anterior fue cerrado, verás su desglose de cierre como referencia.</li>
+    <li><b>Monto declarado</b>Captura el <b>Monto declarado para apertura</b> del turno.</li>
+    <li><b>Conteo físico</b>Ingresa el conteo por denominación, separado en billetes y monedas. Cada tarjeta muestra tipo (<b>Billete</b> o <b>Moneda</b>), botones −/+ para ajustar cantidad, input central y subtotal por fila (<b>cantidad × denominación</b>).</li>
+    <li><b>Confirmar</b>El total del desglose debe coincidir con el monto declarado; si no coincide, el sistema bloquea la apertura. Si el turno anterior fue cerrado, verás el <b>Conteo del cierre anterior</b> como referencia. La fecha de negocio se asigna automáticamente (horario de México).</li>
   </ol>
   <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div>Solo puede haber <b>un turno abierto o reabierto por fecha de negocio</b>.</div></div>
 
@@ -1063,10 +1063,10 @@ details.faq .a p { margin-bottom: 8px; }
   <ol class="steps">
     <li><b>Tipo</b>Elige <b>Ingreso</b> (entra dinero a caja) o <b>Egreso</b> (sale dinero).</li>
     <li><b>Monto y método</b>Captura el monto y la forma de pago. En ingresos, elige también la <b>categoría de ingreso</b> (Restaurante, Minibar, Lavandería…).</li>
-    <li><b>Concepto y cuenta</b>Describe el movimiento y confirma de qué cuenta sale o a cuál entra (<b>Caja</b> o <b>Bancos</b>).</li>
+    <li><b>Concepto y fuente</b>Describe el movimiento y confirma la fuente operativa compatible (<b>Caja</b> o <b>Bancos</b>).</li>
   </ol>
   <div class="callout warn"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.5 18-8.2-14.2a1.5 1.5 0 0 0-2.6 0L2.5 18a1.5 1.5 0 0 0 1.3 2.2h16.4a1.5 1.5 0 0 0 1.3-2.2Z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg><div><b>Tarjeta y transferencia no son efectivo físico.</b> Se registran y aparecen en reportes igual que el efectivo, pero no entran ni salen de la gaveta: no alteran el efectivo esperado del arqueo.</div></div>
-  <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div><b>Cuenta contable vs. cuenta fuente:</b> la cuenta contable clasifica el <em>concepto</em> del movimiento; la cuenta fuente dice <em>de dónde sale o a dónde entra</em> el dinero (solo Caja o Bancos). En ingresos manuales, la granularidad (Restaurante, Minibar, Late checkout…) va en la <b>categoría de ingreso</b>, que no modifica caja ni saldos.</div></div>
+  <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div><b>Cuenta contable vs. fuente operativa:</b> la cuenta contable clasifica el <em>concepto</em> del movimiento; la fuente operativa indica si el dinero entra o sale por <b>Caja</b> o <b>Bancos</b>. En ingresos manuales, la granularidad (Restaurante, Minibar, Late checkout…) va en la <b>categoría de ingreso</b>, que no modifica caja ni saldos.</div></div>
 
   <h3>Cancelar un movimiento manual del turno</h3>
   <ul>
@@ -1080,11 +1080,11 @@ details.faq .a p { margin-bottom: 8px; }
   <p>Úsalo cuando el monto y la reserva son correctos pero la forma de pago fue otra. Ejemplo: capturaste un anticipo como efectivo y en realidad fue transferencia.</p>
   <ol class="steps">
     <li><b>Ubica el movimiento</b>En Caja, botón <span class="kbd">Corregir método</span> sobre el movimiento del turno actual.</li>
-    <li><b>Revisa y corrige</b>El sistema muestra el método actual y sugiere la cuenta compatible: Caja para efectivo, Bancos para tarjeta/transferencia. Si Banco está habilitado y el nuevo método es tarjeta o transferencia, selecciona la cuenta bancaria destino.</li>
+    <li><b>Revisa y corrige</b>El sistema muestra el método actual y resuelve la fuente operativa compatible: Caja para efectivo, Bancos para tarjeta/transferencia. Si el nuevo método es tarjeta o transferencia, selecciona la cuenta bancaria destino; si no hay cuentas bancarias configuradas, detén la corrección y configura <span class="route">Finanzas &gt; Banco</span> antes de guardar un movimiento no-cash.</li>
     <li><b>Motivo y confirmación</b>El motivo es obligatorio y todo queda en auditoría.</li>
   </ol>
   <ul>
-    <li>Solo cambia método, detalle y cuenta fuente — nunca monto, concepto, reserva, turno ni fecha.</li>
+    <li>Solo cambia método, detalle y fuente operativa — nunca monto, concepto, reserva, turno ni fecha.</li>
     <li>Recepción corrige solo movimientos de su turno bajo su custodia; gerencia/admin pueden corregir los del turno activo aunque no sean custodios.</li>
     <li>Al pasar de efectivo a tarjeta/transferencia, el movimiento sale del efectivo esperado del arqueo.</li>
     <li>Si el turno cerró, está en handoff, el día fue auditado o el movimiento ya tiene una excepción, la corrección se bloquea.</li>
@@ -1096,25 +1096,26 @@ details.faq .a p { margin-bottom: 8px; }
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/cash-register</span></div>
       <button type="button" class="shot-link" data-full="img/14-caja-cierre.png" aria-label="Ampliar captura: Diálogo de cierre de turno con arqueo"><img src="img/14-caja-cierre.png" alt="Diálogo de cierre de turno con arqueo" /></button>
     </div>
-    <figcaption><b>Cierre con arqueo.</b> El total contado se calcula desde el desglose de billetes y monedas.</figcaption>
+    <figcaption><b>Cierre con arqueo.</b> La pantalla muestra Esperado por sistema, Conteo físico y Diferencia mientras capturas billetes y monedas.</figcaption>
   </figure>
   <ol class="steps">
-    <li><b>Cuenta el efectivo físico</b>Y captura el arqueo por billetes y monedas; el total se calcula solo.</li>
+    <li><b>Cuenta el efectivo físico</b>Captura el arqueo por billetes y monedas; el <b>Conteo físico</b> se calcula desde ese desglose.</li>
     <li><b>Folios físicos</b>Captura folio inicial y final de las hojas usadas en el turno.</li>
-    <li><b>Revisa el cálculo</b><b>Esperado</b> = apertura + ingresos en efectivo − egresos operativos en efectivo − retiros de utilidad − devoluciones en efectivo. <b>Diferencia</b> = contado − esperado.</li>
-    <li><b>Elige el destino</b><b>Cerrado</b> definitivo, o <b>handoff pendiente</b> seleccionando al usuario que recibirá el turno.</li>
-    <li><b>Confirma</b>Si hay diferencia, queda registrada para revisión.</li>
+    <li><b>Revisa el cálculo</b>La pantalla muestra <b>Esperado por sistema</b>, <b>Conteo físico</b> y <b>Diferencia</b>. <b>Esperado</b> = apertura + ingresos en efectivo − egresos operativos en efectivo − retiros de utilidad − reembolsos en efectivo. <b>Diferencia</b> = conteo físico − esperado.</li>
+    <li><b>Elige el destino</b>Selecciona <b>Cerrado</b> definitivo o <b>Handoff de turno</b>. Si haces handoff, debes elegir el usuario destino antes de confirmar.</li>
+    <li><b>Confirma</b>Para cierre definitivo, usa <span class="kbd">Confirmar cierre definitivo</span>. Si hay diferencia, captura motivo obligatorio; el cierre deja el recibo del conteo y la diferencia auditados.</li>
   </ol>
   <ul>
     <li>Recepción puede hacer el cierre definitivo solo de su propio turno; gerencia/admin pueden cerrar turnos ajenos.</li>
     <li>Los pagos con tarjeta y transferencia sí aparecen en el corte y los reportes por método, pero solo el <b>efectivo</b> altera el esperado del arqueo.</li>
   </ul>
 
-  <h3>Handoff: transferir el turno</h3>
+  <h3>Handoff de turno</h3>
   <ul>
-    <li>Transfiere la responsabilidad del turno sin cerrarlo. Siempre es <b>designado</b>: eliges al usuario destino.</li>
-    <li>También pide el arqueo por denominaciones, que debe cuadrar con el contado.</li>
-    <li>Mientras el turno está en <b>handoff pendiente</b>, nadie puede registrar pagos ni movimientos.</li>
+    <li>Transfiere la responsabilidad del turno sin cerrarlo. Siempre es <b>designado</b>: debes seleccionar el usuario destino antes de confirmar.</li>
+    <li>También pide el arqueo por denominaciones; el total calculado debe coincidir con el conteo físico enviado al servidor o el sistema bloquea la operación.</li>
+    <li>La confirmación funciona como <b>recibo de custodia</b>: muestra fecha de negocio, esperado por sistema, monto transferido, diferencia, folios físicos y usuario destino. En el resumen, el conteo físico se etiqueta como <b>Monto transferido</b>.</li>
+    <li>Mientras el turno está en <b>handoff pendiente</b>, nadie puede registrar pagos, cargos ni movimientos.</li>
     <li>Solo el usuario destino (o gerencia/admin) puede aceptar; al aceptar, el turno vuelve a estar abierto con el nuevo custodio registrado.</li>
   </ul>
 
@@ -1135,7 +1136,7 @@ details.faq .a p { margin-bottom: 8px; }
   </ul>
 
   <h3>Gastos pagados desde el banco (sin pasar por caja)</h3>
-  <div class="callout perm"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="10" x="5" y="11" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg><div>Solo <b>gerencia/admin</b>. Cuando se paga un gasto directamente desde la cuenta bancaria de la empresa, se registra en <span class="route">Finanzas &gt; Banco</span> — nunca por caja. No requiere turno, siempre usa cuenta fuente Bancos y no toca el efectivo esperado del cajero. El flujo antiguo de "egresos bancarios" quedó bloqueado; si Banco aún no está habilitado para captura en tu hotel, detén el registro y coordina con gerencia.</div></div>
+  <div class="callout perm"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="10" x="5" y="11" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg><div>Solo <b>gerencia/admin</b>. Cuando se paga un gasto directamente desde la cuenta bancaria de la empresa, se registra en <span class="route">Finanzas &gt; Banco</span> — nunca por caja. No requiere turno, siempre usa fuente operativa Bancos y no toca el efectivo esperado del cajero. El flujo antiguo de "egresos bancarios" quedó bloqueado; si Banco aún no está habilitado para captura en tu hotel, detén el registro y coordina con gerencia.</div></div>
   <div class="toplink"><a href="#top">↑ Volver al inicio</a></div>
 </section>
 
@@ -1245,8 +1246,8 @@ details.faq .a p { margin-bottom: 8px; }
 
   <div class="cards">
     <div class="card"><b class="t">📈 Resumen financiero</b><p>KPIs y gráfica del periodo. Si Banco está disponible, muestra una banda con total banco, efectivo operativo y liquidez total.</p></div>
-    <div class="card"><b class="t">📋 Transacciones</b><p>Todos los movimientos con filtros por fecha, método, cuenta fuente y búsqueda libre. Exporta a CSV.</p></div>
-    <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>Resumen de turnos</b><p>Por fecha: apertura, cierre, ingresos, egresos, esperado, contado, diferencia y encargado del turno.</p></div>
+    <div class="card"><b class="t">📋 Transacciones</b><p>Todos los movimientos con filtros por fecha, método, fuente operativa y búsqueda libre. Exporta a CSV.</p></div>
+    <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>Resumen de turnos</b><p>Por fecha: apertura, cierre, ingresos, egresos, esperado por sistema, conteo físico, diferencia y encargado del turno.</p></div>
     <div class="card"><b class="t">💳 Cuentas por cobrar</b><p>Reservas con saldo pendiente y la acción sugerida según su etapa (cobrar antes de llegada, liquidar antes de salida…).</p></div>
     <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.8 6.8 0 0 0 8 8 8 8 0 1 1-8-8Z" /></svg>Cierres diarios</b><p>Resultado de cada auditoría nocturna: ocupación, llegadas, no-shows, ingresos, neto y quién cerró.</p></div>
     <div class="card"><b class="t"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3" /><circle cx="6" cy="18" r="3" /><path d="M20 4 8.1 15.9" /><path d="M14.5 14.5 20 20" /><path d="M8.1 8.1 12 12" /></svg>Corte por turno</b><p>El corte detallado para reemplazar el Excel operativo, exportable a XLSX.</p></div>
@@ -1258,7 +1259,7 @@ details.faq .a p { margin-bottom: 8px; }
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/reports?tab=transactions</span></div>
       <button type="button" class="shot-link" data-full="img/19-reportes-transacciones.png" aria-label="Ampliar captura: Pestaña de transacciones"><img src="img/19-reportes-transacciones.png" alt="Pestaña de transacciones" /></button>
     </div>
-    <figcaption><b>Transacciones.</b> Cada movimiento muestra concepto, reserva, categoría, método, cuenta fuente, impacto en efectivo y usuario.</figcaption>
+    <figcaption><b>Transacciones.</b> Cada movimiento muestra concepto, reserva, categoría, método, fuente operativa, impacto en efectivo y usuario.</figcaption>
   </figure>
 
   <h4>Corte por turno</h4>
@@ -1271,7 +1272,7 @@ details.faq .a p { margin-bottom: 8px; }
   </figure>
   <ul>
     <li>Modo <b>Por turno</b> (un turno exacto) o <b>Por día operativo</b> (todos los turnos de la misma fecha de negocio).</li>
-    <li><b>Esperado</b> y <b>Contado</b> son solo efectivo; tarjeta y transferencia se ven en el flujo sin inflar el efectivo.</li>
+    <li><b>Esperado por sistema</b> y <b>Conteo físico</b> son solo efectivo; tarjeta y transferencia se ven en el flujo sin inflar el efectivo.</li>
     <li>Los movimientos históricos o fuera de turno aparecen en un bloque separado para no confundirse con la caja del cajero.</li>
     <li>Exportable a <b>XLSX</b> para compartir o archivar.</li>
   </ul>
@@ -1290,13 +1291,13 @@ details.faq .a p { margin-bottom: 8px; }
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/balance</span></div>
       <button type="button" class="shot-link" data-full="img/21-balance.png" aria-label="Ampliar captura: Balance"><img src="img/21-balance.png" alt="Balance" /></button>
     </div>
-    <figcaption><b>Balance.</b> Flujo neto del periodo al frente, columnas de ingresos y egresos, y resumen por método y cuenta fuente.</figcaption>
+    <figcaption><b>Balance.</b> Flujo neto del periodo al frente, columnas de ingresos y egresos, y resumen por método y fuente operativa.</figcaption>
   </figure>
   <ul>
     <li>Doble vista: <b>Folios</b> (hospedaje, extras, ajustes) y <b>Transacciones</b> (flujo de dinero).</li>
     <li>La tarjeta <b>Flujo neto</b> es lo primero que ves: verde si es positivo, rojo si es negativo.</li>
     <li>Chips de INGRESOS y EGRESOS con el desglose por línea (hospedaje, extras, anticipos, cobros, ingresos manuales, egresos operativos, retiros, devoluciones).</li>
-    <li>Filtros por rubro, cuenta, método, cuenta fuente, con/sin turno y búsqueda. El periodo (Desde/Hasta) es el filtro global compartido de Finanzas.</li>
+    <li>Filtros por rubro, cuenta, método, fuente operativa, con/sin turno y búsqueda. El periodo (Desde/Hasta) es el filtro global compartido de Finanzas.</li>
     <li>Exporta a CSV/XLSX con el periodo y filtros visibles.</li>
   </ul>
 
@@ -1414,17 +1415,17 @@ details.faq .a p { margin-bottom: 8px; }
 
   <details class="faq"><summary>No puedo crear una reservación</summary><div class="a"><p>Verifica que haya un turno operativo <b>bajo tu custodia</b> en Caja. Si el turno está en handoff pendiente, pertenece a otro usuario o no hay turno activo, el sistema bloquea la creación. Así todo movimiento (incluyendo anticipos) queda registrado en un turno.</p></div></details>
 
-  <details class="faq"><summary>No puedo registrar un pago, cargo o movimiento de caja</summary><div class="a"><p>Misma causa: necesitas un turno abierto o reabierto bajo tu custodia. Revisa la página de Caja.</p></div></details>
+  <details class="faq"><summary>No puedo registrar un pago, cargo o movimiento de caja</summary><div class="a"><p>Misma causa: necesitas un turno abierto o reabierto bajo tu custodia. Si el pago es con tarjeta o transferencia, también debe existir una cuenta bancaria destino configurada o resuelta por default en Finanzas &gt; Banco.</p></div></details>
 
   <details class="faq"><summary>No puedo hacer check-in</summary><div class="a"><p>La reserva debe estar <b>confirmada</b>, tener <b>habitación asignada</b> y su fecha de entrada debe ser <b>hoy</b>. Si el huésped llegó antes, primero mueve la reserva a hoy (Calendario o Reprogramar) y luego haz check-in.</p></div></details>
 
-  <details class="faq"><summary>No puedo aceptar un handoff</summary><div class="a"><p>Solo el usuario designado como destino del handoff (o gerencia/admin) puede tomar la custodia del turno pendiente.</p></div></details>
+  <details class="faq"><summary>No puedo aceptar un handoff</summary><div class="a"><p>Solo el usuario designado como destino del Handoff de turno (o gerencia/admin) puede tomar la custodia del turno pendiente.</p></div></details>
 
   <details class="faq"><summary>No puedo cerrar definitivamente mi turno</summary><div class="a"><p>Recepción solo cierra el turno que está bajo su custodia actual. Si el turno es de otra persona o sigue en handoff pendiente, primero debe aceptarse o regularizarse.</p></div></details>
 
   <details class="faq"><summary>Registré algo con tarjeta o transferencia y no veo efectivo extra en el cierre</summary><div class="a"><p>Es correcto. Tarjeta y transferencia cuentan en folios, transacciones, balance y reportes por método, pero <b>no aumentan el efectivo esperado</b> del arqueo: ese dinero no está en la gaveta.</p></div></details>
 
-  <details class="faq"><summary>Capturé un anticipo como efectivo, pero en realidad fue transferencia</summary><div class="a"><p>Si el turno sigue abierto y bajo tu custodia: Caja → ubica el movimiento → <b>Corregir método</b> → cambia a transferencia, confirma la cuenta Bancos (y la cuenta bancaria destino si aplica) y captura el motivo. Si el turno ya cerró o el día fue auditado, no uses este flujo: pide a gerencia una corrección post-cierre.</p></div></details>
+  <details class="faq"><summary>Capturé un anticipo como efectivo, pero en realidad fue transferencia</summary><div class="a"><p>Si el turno sigue abierto y bajo tu custodia: Caja → ubica el movimiento → <b>Corregir método</b> → cambia a transferencia, confirma la fuente operativa Bancos, selecciona la cuenta bancaria destino y captura el motivo. Si el turno ya cerró o el día fue auditado, no uses este flujo: pide a gerencia una corrección post-cierre.</p></div></details>
 
   <details class="faq"><summary>Capturé un pago duplicado por error</summary><div class="a"><p>No edites ni borres el pago original. Si el turno original sigue abierto (o se reabre), corrige con <b>void</b> para que la anulación quede en el mismo turno. Si ese turno ya cerró, usa <b>devolución</b> desde el turno actual. Ambas dejan rastro en folio, balance y auditoría.</p></div></details>
 
@@ -1436,11 +1437,11 @@ details.faq .a p { margin-bottom: 8px; }
 
   <details class="faq"><summary>Error: "Las reservaciones terminales no se pueden editar"</summary><div class="a"><p>Las reservas en check-out, canceladas o no-show son terminales: ya no se modifican. Si una cancelada debe revivir, gerencia/admin pueden usar <b>Reactivar reserva</b> cuando es elegible.</p></div></details>
 
-  <details class="faq"><summary>Hay una diferencia en el cierre de turno</summary><div class="a"><p>La diferencia es contado menos esperado. Egresos en efectivo, retiros de utilidad y devoluciones en efectivo ya se descuentan automáticamente del esperado. El faltante o sobrante queda registrado en el reporte de turnos y en el corte para revisión.</p></div></details>
+  <details class="faq"><summary>Hay una diferencia en el cierre de turno</summary><div class="a"><p>La diferencia es Conteo físico menos Esperado por sistema. Egresos en efectivo, retiros de utilidad y reembolsos en efectivo ya se descuentan automáticamente del esperado. Si hay diferencia, el motivo es obligatorio y queda auditado en el recibo del cierre, el reporte de turnos y el corte.</p></div></details>
 
   <details class="faq"><summary>Veo movimientos en Balance que no salen en el corte por turno</summary><div class="a"><p>Seguramente son movimientos históricos importados o registrados fuera de turno (como movimientos bancarios gerenciales). El balance global los muestra; el corte operativo solo incluye lo ligado al turno seleccionado.</p></div></details>
 
-  <details class="faq"><summary>¿Cómo saco dinero de caja como gasto operativo?</summary><div class="a"><p>Caja → <b>Ingreso / egreso operativo</b> → dirección <b>Egreso</b> → forma de pago efectivo, concepto y cuenta de gasto → cuenta fuente Caja. Ese movimiento sí cuenta como egreso operativo y baja el efectivo esperado.</p></div></details>
+  <details class="faq"><summary>¿Cómo saco dinero de caja como gasto operativo?</summary><div class="a"><p>Caja → <b>Ingreso / egreso operativo</b> → dirección <b>Egreso</b> → forma de pago efectivo, concepto y cuenta de gasto → fuente operativa Caja. Ese movimiento sí cuenta como egreso operativo y baja el efectivo esperado.</p></div></details>
 
   <details class="faq"><summary>¿Cómo hago un retiro de utilidad?</summary><div class="a"><p>Con turno abierto, botón <b>Retiro de utilidad</b> en Caja, monto y notas. Se registra como categoría separada (no es egreso operativo ni devolución) y se resta del efectivo esperado. Si excede el efectivo del turno, se bloquea.</p></div></details>
 
@@ -1469,9 +1470,9 @@ details.faq .a p { margin-bottom: 8px; }
       <tr><td><b>Regla de temporada</b></td><td>Modificador porcentual sobre la tarifa base para un rango de fechas.</td></tr>
       <tr><td><b>Cascada de precios</b></td><td>Orden de prioridad: override → regla de temporada → tarifa base.</td></tr>
       <tr><td><b>Precio pactado bloqueado</b></td><td>Política que conserva un total fijo acordado con el huésped, aunque el recálculo automático sugiera otro, hasta que un rol autorizado la cambie.</td></tr>
-      <tr><td><b>Handoff</b></td><td>Transferencia designada del turno al siguiente usuario; requiere aceptación explícita.</td></tr>
-      <tr><td><b>Esperado</b></td><td>Efectivo que debería haber en la gaveta al cierre: apertura + ingresos en efectivo − egresos en efectivo − retiros − devoluciones en efectivo.</td></tr>
-      <tr><td><b>Diferencia</b></td><td>Contado − esperado. Faltante o sobrante del arqueo.</td></tr>
+      <tr><td><b>Handoff de turno</b></td><td>Transferencia designada del turno al siguiente usuario; requiere usuario destino y aceptación explícita.</td></tr>
+      <tr><td><b>Esperado por sistema</b></td><td>Efectivo que debería haber en la gaveta al cierre: apertura + ingresos en efectivo − egresos en efectivo − retiros − reembolsos en efectivo.</td></tr>
+      <tr><td><b>Diferencia</b></td><td>Conteo físico − esperado por sistema. Faltante o sobrante del arqueo.</td></tr>
       <tr><td><b>Corrección post-cierre</b></td><td>Movimiento compensatorio trazable que corrige un error después de la auditoría nocturna.</td></tr>
       <tr><td><b>Void</b></td><td>Anulación de un pago el mismo día de negocio, con el turno original aún abierto.</td></tr>
       <tr><td><b>Devolución (refund)</b></td><td>Anulación registrada en el turno actual cuando el turno original ya cerró.</td></tr>
@@ -1482,7 +1483,7 @@ details.faq .a p { margin-bottom: 8px; }
       <tr><td><b>Bloqueo</b></td><td>Periodo en que una habitación no puede asignarse (operación o mantenimiento).</td></tr>
       <tr><td><b>Walk-in</b></td><td>Huésped que llega sin reserva previa. El sistema lo registra como canal Directo.</td></tr>
       <tr><td><b>Movimiento fuera de turno</b></td><td>Transacción visible en balance y reportes que no pertenece a ningún turno; no entra al corte del cajero.</td></tr>
-      <tr><td><b>Cuenta fuente</b></td><td>De dónde sale o a dónde entra el dinero: Caja o Bancos.</td></tr>
+      <tr><td><b>Fuente operativa</b></td><td>Origen canónico del movimiento: Caja para efectivo o Bancos para tarjeta/transferencia. En pagos no-cash, la cuenta bancaria real se selecciona aparte.</td></tr>
       <tr><td><b>Categoría de ingreso</b></td><td>Clasificación gerencial de un ingreso (Restaurante, Minibar…). No cambia caja ni saldos.</td></tr>
     </tbody>
   </table>
