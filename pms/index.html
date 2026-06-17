@@ -858,7 +858,7 @@ details.faq .a p { margin-bottom: 8px; }
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/groups/[id]</span></div>
       <button type="button" class="shot-link" data-full="img/08-grupo-detalle.png" aria-label="Ampliar captura: Detalle de grupo"><img src="img/08-grupo-detalle.png" alt="Detalle de grupo" /></button>
     </div>
-    <figcaption><b>Detalle del grupo.</b> Resumen general, total, anticipo, saldo y desglose por habitación. Cada habitación conserva su propio folio, pagos, check-in y check-out.</figcaption>
+    <figcaption><b>Detalle del grupo.</b> Resumen general, total, anticipo, saldo y desglose por habitación. Cada habitación conserva su propio folio, pagos, check-in y check-out. <b>Requiere nueva captura:</b> debe mostrar el flujo de Fechas con vista previa, tabla por hija, habitación destino, decisión de precio y advertencias.</figcaption>
   </figure>
 
   <h4>Operar un grupo existente</h4>
@@ -869,10 +869,12 @@ details.faq .a p { margin-bottom: 8px; }
     <li><span class="kbd">Cargo</span>: agrega un concepto y monto a las habitaciones que elijas, con su categoría de ingreso.</li>
     <li><span class="kbd">Ajustar precios</span>: recalcula automático, fija precio por habitación o reparte un total manual del grupo.</li>
     <li><span class="kbd">Pago</span>: registra un pago grupal; el sistema lo distribuye entre las habitaciones con saldo. Si el pago es tarjeta o transferencia, selecciona cuenta bancaria destino.</li>
-    <li><span class="kbd">Fechas</span>: reprograma todas las habitaciones con vista previa; si una no está disponible, no se cambia ninguna.</li>
+    <li><span class="kbd">Fechas</span>: abre el plan de reprogramación grupal. Captura nuevas fechas comunes, previsualiza antes de aplicar, revisa la habitación sugerida de cada hija, cambia la habitación destino por fila si hace falta y elige el precio por hija: conservar el actual, usar el recálculo del sistema o capturar un total manual. Después confirma advertencias, escribe motivo y aplica. Si el plan cambió desde la vista previa, el sistema pide volver a previsualizar.</li>
     <li><span class="kbd">Cancelar</span>: solo si ninguna habitación tiene check-in o check-out hecho.</li>
     <li><span class="kbd">Quitar</span>: separa una habitación del grupo. Si su folio ya tiene pagos o cargos, se conserva como reserva individual; si solo tenía el hospedaje automático y no había iniciado, se cancela.</li>
   </ul>
+
+  <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div><b>Fechas en grupos:</b> en esta versión se reprograman juntas solo habitaciones del mismo tipo. Si una hija debe pasar a otro tipo, usa <span class="kbd">Cambiar hab.</span> sobre esa hija. Cada hija conserva su folio propio; no existe folio consolidado del grupo. La aplicación es todo o nada: si una hija falla, no cambia ninguna.</div></div>
 
   <h3>Mover reservaciones arrastrando</h3>
   <ul>
@@ -880,7 +882,7 @@ details.faq .a p { margin-bottom: 8px; }
     <li>Todo movimiento abre una <b>vista previa validada</b>, muestra advertencias y pide un <b>motivo</b> antes de confirmar.</li>
     <li>Si cambias el tipo de habitación antes del check-in, decides: recalcular precio, conservarlo, o capturar un nuevo precio pactado.</li>
     <li>Los huéspedes <b>en casa</b> también se pueden arrastrar para cambiar de habitación manteniendo las mismas fechas (incluso a otro tipo, como cortesía); el precio no cambia y el sistema pide confirmar la advertencia.</li>
-    <li>Las habitaciones de un grupo se arrastran solo individualmente para cambio de habitación; las fechas del grupo se cambian desde el detalle del grupo.</li>
+    <li>Las habitaciones de un grupo se arrastran solo individualmente para cambio de habitación; las fechas comunes del grupo se cambian desde <span class="kbd">Fechas</span> en el detalle del grupo, con vista previa fresca antes de aplicar.</li>
   </ul>
 
   <h3>Estados de una reservación</h3>
@@ -1358,11 +1360,13 @@ details.faq .a p { margin-bottom: 8px; }
   </figure>
   <ul>
     <li>Visible para gerencia, admin y auditoría. Recepción ve nombres de cuentas al cobrar (nunca saldos).</li>
-    <li>Acciones bancarias: gasto, pago a acreedor, retiro de utilidad, comisión, ajuste, transferencia interna o salida bancaria sin clasificación — siempre con cuenta bancaria real y fecha operativa.</li>
+    <li>Acciones bancarias: gasto, pago a acreedor, retiro de utilidad, entrada de dueño / empresa relacionada, comisión, ajuste, transferencia interna o salida bancaria sin clasificación — siempre con cuenta bancaria real y fecha operativa.</li>
     <li><b>Pago de cuenta pendiente</b> baja la deuda y la liquidez, pero no crea gasto nuevo.</li>
+    <li><b>Entrada de dueño / empresa relacionada</b> se usa cuando el dueño, socio o empresa relacionada deposita dinero en una cuenta bancaria real del hotel. Aumenta Banco como ajuste bancario no operativo, requiere motivo, puede llevar referencia y notas, y aparece en movimientos y export de Banco. En notas conviene escribir: <em>No es ingreso operativo del hotel</em>. No cuenta como hospedaje, venta, pago de huésped, pago de cuenta pendiente, gasto, Costo por noche ni transferencia interna.</li>
     <li><b>Comisión bancaria</b> es gasto financiero no operativo; no se mezcla con egresos operativos del cajero.</li>
     <li><b>Salida bancaria sin clasificación</b> es salida bancaria avanzada sin gasto real ni Costo por noche.</li>
     <li><b>Banco a banco</b>, <b>banco a caja</b> y <b>caja a banco</b> son transferencias internas; no son ingreso, gasto ni retiro de utilidad.</li>
+    <li><b>No uses Ingreso bancario manual</b> para aportes, préstamos o entradas patrimoniales del dueño o empresa relacionada. Tampoco uses <b>Transferencia a empresa relacionada</b> para entradas: ese flujo representa salida o retiro desde Banco.</li>
     <li>Salvo el depósito de efectivo a banco hecho desde Caja, los movimientos bancarios gerenciales <b>no entran al corte del cajero</b> ni alteran el efectivo esperado.</li>
   </ul>
 
