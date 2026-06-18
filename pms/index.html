@@ -848,23 +848,25 @@ details.faq .a p { margin-bottom: 8px; }
   <ol class="steps">
     <li><b>Captura el grupo</b>Titular principal, fechas comunes y canal.</li>
     <li><b>Selecciona las habitaciones</b>Mínimo dos. Solo aparecen las disponibles para el rango completo.</li>
-    <li><b>Revisa los precios</b>El sistema sugiere el precio por habitación con la tarifa vigente. Si cambias un importe manualmente, esa habitación queda con <em>precio pactado bloqueado</em>.</li>
+    <li><b>Declara ocupantes</b>Por cada habitación, captura el ocupante primario o marca explícitamente que la ocupa el titular. El titular principal queda como contacto, booker y pagador por defecto; no se replica como ocupante automático de todas las habitaciones.</li>
+    <li><b>Revisa los precios</b>El sistema sugiere el precio por habitación con la tarifa vigente. Si cambias un importe manualmente, debes capturar motivo y esa habitación queda con <em>precio pactado bloqueado</em>.</li>
     <li><b>Anticipo inicial (opcional)</b>Se reparte en partes iguales entre las habitaciones. Si se cobra con tarjeta o transferencia, debe existir una cuenta bancaria destino; sin cuenta configurada, el grupo no se crea con anticipo no-cash.</li>
     <li><b>Confirma</b>Si alguna habitación deja de estar disponible, no se crea nada y el sistema te explica el bloqueo.</li>
   </ol>
+  <p>En esta versión no se captura un total de personas para todo el grupo ni se replica automáticamente a las hijas. Cada habitación declara su ocupante primario para que Clientes/CRM no atribuya estancias falsas al titular del grupo.</p>
 
   <figure class="shot">
     <div class="browser-shot">
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/groups/[id]</span></div>
       <button type="button" class="shot-link" data-full="img/08-grupo-detalle.png" aria-label="Ampliar captura: Detalle de grupo"><img src="img/08-grupo-detalle.png" alt="Detalle de grupo" /></button>
     </div>
-    <figcaption><b>Detalle del grupo.</b> Resumen general, total, anticipo, saldo y desglose por habitación. Cada habitación conserva su propio folio, pagos, check-in y check-out. <b>Requiere nueva captura:</b> debe mostrar el flujo de Fechas con vista previa, tabla por hija, habitación destino, decisión de precio y advertencias.</figcaption>
+    <figcaption><b>Detalle del grupo.</b> Resumen general, total, anticipo, saldo y desglose por habitación. Cada habitación conserva su propio folio, pagos, check-in y check-out. <b>Captura pendiente:</b> reemplazar por captura del detalle de grupo con el planner de agregar habitación abierto o visible.</figcaption>
   </figure>
 
   <h4>Operar un grupo existente</h4>
   <ul>
     <li><span class="kbd">Editar</span>: cambia titular, canal y notas del grupo.</li>
-    <li><span class="kbd">Habitación</span>: agrega otra habitación con las fechas comunes del grupo.</li>
+    <li><span class="kbd">Habitación</span>: abre un flujo guiado para agregar una reserva hija nueva con las fechas comunes del grupo. Recepción selecciona habitación disponible, ocupante (<span class="kbd">Nuevo ocupante</span>, <span class="kbd">Cliente existente</span> o <span class="kbd">Titular ocupa</span>), personas opcionales y precio (<span class="kbd">Sistema</span>, <span class="kbd">Manual</span>, <span class="kbd">Copiar</span> o <span class="kbd">Promedio</span>). Si capturas Personas, debe ser mayor a cero. Copiar y Promedio usan el precio efectivo del folio: hospedaje más ajustes grupales aplicados. Antes de aplicar, revisa total/saldo proyectado con una previsualización fresca; si falla la previsualización, cambia disponibilidad/precio o cambia una hija del grupo, debes previsualizar de nuevo. La nueva hija nace con folio propio. Si hay saldo a favor proyectado, el sistema muestra advertencia y permite continuar solo al confirmarla.</li>
     <li><span class="kbd">Adjuntar</span>: vincula una reserva existente que comparta las fechas.</li>
     <li><span class="kbd">Cargo</span>: agrega un concepto y monto a las habitaciones que elijas, con su categoría de ingreso.</li>
     <li><span class="kbd">Ajustar precios</span>: recalcula automático, fija precio por habitación o reparte un total manual del grupo.</li>
@@ -1035,7 +1037,7 @@ details.faq .a p { margin-bottom: 8px; }
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/cash-register</span></div>
       <button type="button" class="shot-link" data-full="img/12-caja.png" aria-label="Ampliar captura: Página de caja con turno abierto"><img src="img/12-caja.png" alt="Página de caja con turno abierto" /></button>
     </div>
-    <figcaption><b>Caja y turnos.</b> Turno abierto con el efectivo esperado en vivo. <b>Requiere nueva captura:</b> para publicación final conviene mostrar la vista de recepción sin botones gerenciales como Retiro de utilidad.</figcaption>
+    <figcaption><b>Caja y turnos.</b> Turno abierto con el efectivo esperado en vivo. <b>Captura pendiente:</b> reemplazar por Caja actual, idealmente vista de recepción y acciones vigentes.</figcaption>
   </figure>
 
   <figure class="shot">
@@ -1043,7 +1045,7 @@ details.faq .a p { margin-bottom: 8px; }
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/cash-register</span></div>
       <button type="button" class="shot-link" data-full="img/12b-caja-movimientos.png" aria-label="Ampliar captura: Flujo por método de pago y detalle del turno"><img src="img/12b-caja-movimientos.png" alt="Flujo por método de pago y detalle del turno" /></button>
     </div>
-    <figcaption><b>Flujo por método y detalle del turno.</b> Ingresos, egresos y devoluciones separados por efectivo, tarjeta y transferencia. <b>Requiere nueva captura:</b> debe reflejar la separación Phase 13 entre egreso simple cash-only, depósito a banco y flujos gerenciales.</figcaption>
+    <figcaption><b>Flujo por método y detalle del turno.</b> Ingresos, egresos y devoluciones separados por efectivo, tarjeta y transferencia. <b>Captura pendiente:</b> reemplazar por detalle de turno con separación actual de ingresos, egreso simple, gasto operativo desde caja y depósito a banco.</figcaption>
   </figure>
 
   <h3>Abrir turno</h3>
@@ -1054,21 +1056,21 @@ details.faq .a p { margin-bottom: 8px; }
   </ol>
   <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /><path d="M10 14h4" /></svg><div>Solo puede haber <b>un turno abierto o reabierto por fecha de negocio</b>.</div></div>
 
-  <h3>Registrar venta rápida, ingresos y egreso simple</h3>
+  <h3>Registrar venta rápida, ingresos, egreso simple y gasto operativo</h3>
   <figure class="shot">
     <div class="browser-shot">
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/cash-register</span></div>
       <button type="button" class="shot-link" data-full="img/13-caja-movimiento.png" aria-label="Ampliar captura: Diálogo de ingreso/egreso operativo"><img src="img/13-caja-movimiento.png" alt="Diálogo de ingreso/egreso operativo" /></button>
     </div>
-    <figcaption><b>Ingreso / egreso operativo.</b> <b>Requiere nueva captura:</b> el flujo final debe mostrar egreso simple cash-only y cuenta bancaria destino para ingresos con tarjeta/transferencia.</figcaption>
+    <figcaption><b>Ingreso / egreso operativo.</b> <b>Captura pendiente:</b> reemplazar por diálogo actual de <em>Gasto operativo desde caja</em> o por captura final del flujo de egreso/ingreso vigente.</figcaption>
   </figure>
   <ol class="steps">
-    <li><b>Tipo</b>Elige <b>Ingreso</b> para venta rápida o ingreso operativo, o <b>Egreso simple</b> para una salida menor de efectivo del turno.</li>
+    <li><b>Tipo</b>Elige <b>Ingreso</b> para venta rápida o ingreso operativo, <b>Egreso simple</b> para una salida menor de efectivo del turno, o <b>Gasto operativo desde caja</b> si la salida debe quedar como gasto real categorizado.</li>
     <li><b>Monto y método</b>Los ingresos pueden ser efectivo, tarjeta o transferencia. Si son tarjeta/transferencia, selecciona cuenta bancaria destino. El egreso simple de recepción es <b>solo efectivo</b>.</li>
-    <li><b>Concepto y fuente</b>Describe el movimiento. La fuente operativa es <b>Caja</b> para efectivo y <b>Bancos</b> solo para ingresos no-cash; un egreso simple nunca usa Bancos.</li>
+    <li><b>Concepto y fuente</b>Describe el movimiento. La fuente operativa es <b>Caja</b> para efectivo y <b>Bancos</b> solo para ingresos no-cash; un egreso simple nunca usa Bancos. El gasto operativo desde caja es cash-only, requiere categoría activa y alcance <b>Hotel</b> o <b>Habitación</b>.</li>
   </ol>
   <div class="callout warn"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.5 18-8.2-14.2a1.5 1.5 0 0 0-2.6 0L2.5 18a1.5 1.5 0 0 0 1.3 2.2h16.4a1.5 1.5 0 0 0 1.3-2.2Z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg><div><b>Tarjeta y transferencia no son efectivo físico.</b> Se registran y aparecen en reportes igual que el efectivo, pero no entran ni salen de la gaveta: no alteran el efectivo esperado del arqueo.</div></div>
-  <div class="callout warn"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.5 18-8.2-14.2a1.5 1.5 0 0 0-2.6 0L2.5 18a1.5 1.5 0 0 0 1.3 2.2h16.4a1.5 1.5 0 0 0 1.3-2.2Z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg><div><b>Recepción no registra gasto real, cuenta pendiente ni retiro de utilidad.</b> Si el movimiento paga proveedor, tarjeta, deuda o retiro de la dueña/empresa relacionada, escala a gerencia/admin para usar Finanzas gerenciales o Banco.</div></div>
+  <div class="callout warn"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.5 18-8.2-14.2a1.5 1.5 0 0 0-2.6 0L2.5 18a1.5 1.5 0 0 0 1.3 2.2h16.4a1.5 1.5 0 0 0 1.3-2.2Z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg><div><b>Gasto operativo desde caja es una excepción controlada.</b> Recepción puede capturarlo solo desde Caja, con turno propio abierto o reabierto, cash-only, categoría activa y alcance Hotel o Habitación; si eliges Habitación, selecciona la habitación. Reduce el efectivo esperado del turno y no abre Banco, cuentas pendientes, saldos ni Finanzas gerenciales. Para compra a crédito, pago de deuda, retiro de utilidad o salida bancaria, escala a gerencia/admin.</div></div>
   <div class="callout info"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1.1.8-1.9 1.5-2.8A6 6 0 1 0 7.5 11.2c.7.9 1.3 1.7 1.5 2.8" /><path d="M9 18h6" /><path d="M10 22h4" /></svg><div><b>Cuenta contable vs. fuente operativa:</b> la cuenta contable clasifica el <em>concepto</em> del movimiento; la fuente operativa indica si el dinero va por <b>Caja</b> o <b>Bancos</b>. La cuenta bancaria real se elige aparte solo cuando el método es tarjeta o transferencia.</div></div>
 
   <h3>Cancelar un movimiento manual del turno</h3>
@@ -1143,7 +1145,7 @@ details.faq .a p { margin-bottom: 8px; }
     <li>Mientras el día siga abierto (sin auditoría nocturna), se permiten correcciones normales según el rol.</li>
     <li>Una vez <b>auditado</b> el día, nada se edita ni se borra: la corrección se hace con un <b>movimiento compensatorio enlazado</b>, solo gerencia/admin y con motivo.</li>
     <li><b>Reabrir un turno cerrado</b> (gerencia/admin): el conteo se resetea y hay que volver a cerrar.</li>
-    <li><b>Reabrir un día auditado</b> es excepción: se hace desde Reportes, con motivo, y queda auditoría completa de quién, cuándo y por qué. Si el error se puede resolver con compensación, esa es la vía preferida.</li>
+    <li><b>Reabrir un día auditado</b> es excepción: se hace desde Finanzas → Reportes operativos, con motivo, y queda auditoría completa de quién, cuándo y por qué. Si el error se puede resolver con compensación, esa es la vía preferida.</li>
   </ul>
 
   <h3>Gastos pagados desde el banco (sin pasar por caja)</h3>
@@ -1230,7 +1232,7 @@ details.faq .a p { margin-bottom: 8px; }
     <li><b>Seguimiento</b>: recepción, gerencia y admin crean tareas, notas internas y resúmenes de contacto. Los eventos de campaña manual son de gerencia/admin.</li>
     <li>Si el cliente está marcado <b>No contactar</b>, el sistema bloquea acciones con canal de contacto; las notas y tareas internas siguen disponibles.</li>
     <li><b>Duplicados</b> (gerencia/admin): el sistema sugiere posibles duplicados por teléfono, WhatsApp o correo. La fusión siempre es manual, pide una razón, muestra vista previa y exige escribir el código del cliente que se conserva. Nada se borra físicamente.</li>
-    <li><b>Reportes CRM</b> <span class="route">/customers/reports</span>: vista agregada para gerencia, admin y auditoría con reservas, estancias, cargos, pagos y saldo por cliente.</li>
+    <li><b>Reportes CRM</b> <span class="route">/customers/reports</span>: vista agregada para gerencia, admin y auditoría con reservas, estancias, cargos, pagos y saldo por cliente. En grupos, separa el rol de booker/contacto del ocupante real: el titular no recibe estancias ni noches de habitaciones que no ocupa.</li>
   </ul>
 
   <h3>Asistente interno <span class="route">/assistant</span></h3>
@@ -1249,10 +1251,10 @@ details.faq .a p { margin-bottom: 8px; }
   <h3>Reportes operativos</h3>
   <figure class="shot">
     <div class="browser-shot">
-      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/reports</span></div>
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/finance</span></div>
       <button type="button" class="shot-link" data-full="img/18-reportes-resumen.png" aria-label="Ampliar captura: Resumen financiero"><img src="img/18-reportes-resumen.png" alt="Resumen financiero" /></button>
     </div>
-    <figcaption><b>Resumen financiero.</b> KPIs del periodo y tendencia diaria. <b>Requiere nueva captura:</b> debe tomarse desde la superficie final de Finanzas gerenciales y mostrar Banco separado de efectivo cuando aplique.</figcaption>
+    <figcaption><b>Resumen financiero.</b> KPIs del periodo y tendencia diaria. <b>Captura pendiente:</b> reemplazar por Resumen de Finanzas con datos demo útiles.</figcaption>
   </figure>
 
   <div class="cards">
@@ -1267,19 +1269,19 @@ details.faq .a p { margin-bottom: 8px; }
 
   <figure class="shot">
     <div class="browser-shot">
-      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/reports?tab=transactions</span></div>
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/finance?tab=reports</span></div>
       <button type="button" class="shot-link" data-full="img/19-reportes-transacciones.png" aria-label="Ampliar captura: Pestaña de transacciones"><img src="img/19-reportes-transacciones.png" alt="Pestaña de transacciones" /></button>
     </div>
-    <figcaption><b>Transacciones.</b> Cada movimiento muestra concepto, reserva, categoría, método, fuente operativa, impacto en efectivo y usuario. <b>Requiere nueva captura:</b> evitar copy legacy, siglas internas visibles para recepción o estados técnicos.</figcaption>
+    <figcaption><b>Transacciones.</b> Cada movimiento muestra concepto, reserva, categoría, método, fuente operativa, impacto en efectivo y usuario. <b>Captura pendiente:</b> reemplazar por Reportes operativos mostrando filas demo.</figcaption>
   </figure>
 
   <h4>Corte por turno</h4>
   <figure class="shot">
     <div class="browser-shot">
-      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/reports?tab=shift-cut</span></div>
+      <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/finance?tab=reports</span></div>
       <button type="button" class="shot-link" data-full="img/20-reportes-corte.png" aria-label="Ampliar captura: Corte por turno"><img src="img/20-reportes-corte.png" alt="Corte por turno" /></button>
     </div>
-    <figcaption><b>Corte por turno.</b> Encabezado, ingresos, egresos, control de efectivo, totales por método, arqueos y diferencia. <b>Requiere nueva captura:</b> evitar estados técnicos y etiquetas internas en inglés.</figcaption>
+    <figcaption><b>Corte por turno.</b> Encabezado, ingresos, egresos, control de efectivo, totales por método, arqueos y diferencia. <b>Captura pendiente:</b> reemplazar por Corte por turno con un corte demo cerrado.</figcaption>
   </figure>
   <ul>
     <li>Modo <b>Por turno</b> (un turno exacto) o <b>Por día operativo</b> (todos los turnos de la misma fecha de negocio).</li>
@@ -1289,7 +1291,7 @@ details.faq .a p { margin-bottom: 8px; }
     <li>Exportable a <b>XLSX</b> para compartir o archivar.</li>
   </ul>
 
-  <h4>Acciones administrativas desde Reportes</h4>
+  <h4>Acciones administrativas desde Reportes operativos</h4>
   <ul>
     <li>Ejecutar la <b>auditoría nocturna</b> (requiere que no haya turnos activos).</li>
     <li><b>Reabrir un día auditado</b> con motivo obligatorio.</li>
@@ -1321,12 +1323,12 @@ details.faq .a p { margin-bottom: 8px; }
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/finance?tab=managerial</span></div>
       <button type="button" class="shot-link" data-full="img/22-finanzas-gastos.png" aria-label="Ampliar captura: Finanzas gerenciales"><img src="img/22-finanzas-gastos.png" alt="Finanzas gerenciales" /></button>
     </div>
-    <figcaption><b>Finanzas gerenciales.</b> Captura supervisada de gastos reales, pagos a acreedores y retiros, con el periodo global arriba de las pestañas. <b>Requiere nueva captura:</b> no debe mostrar estados técnicos ni nombres demo del modulo anterior.</figcaption>
+    <figcaption><b>Finanzas gerenciales.</b> Captura supervisada de gastos reales, pagos a acreedores y retiros, con el periodo global arriba de las pestañas. <b>Captura pendiente:</b> reemplazar por Gastos reales con datos demo o formulario final.</figcaption>
   </figure>
   <p>La captura en Finanzas gerenciales es para <b>gerencia/admin en piloto supervisado</b>. Las reglas de oro:</p>
   <ul>
     <li><b>Gasto con tarjeta del dueño o gerente</b>: regístralo como gasto real con fuente externa; crea una cuenta por pagar y no baja caja.</li>
-    <li><b>Gasto desde la caja del hotel</b>: solo si tienes turno propio abierto y lo seleccionas. El movimiento también aparecerá en Caja y bajará el efectivo esperado.</li>
+    <li><b>Gasto desde la caja del hotel</b>: gerencia/admin pueden registrarlo en Finanzas gerenciales si tienen turno propio abierto y lo seleccionan. Recepción usa <b>Gasto operativo desde caja</b> desde Caja; el movimiento también aparecerá en Caja y bajará el efectivo esperado una sola vez.</li>
     <li><b>Compra a crédito / cuenta pendiente</b>: crea deuda del hotel, pero no baja caja ni banco hoy.</li>
     <li><b>Pago a tarjeta o acreedor</b>: regístralo como pago de cuenta pendiente — no como gasto nuevo ni retiro.</li>
     <li><b>Retiro real del dueño</b>: como retiro de utilidad, solo cuando el dinero sale para el dueño o empresa relacionada y no paga proveedor, tarjeta ni deuda.</li>
@@ -1344,7 +1346,7 @@ details.faq .a p { margin-bottom: 8px; }
   </figure>
   <ul>
     <li>Es costeo operativo gerencial basado en gastos reales y ocupación. <b>No es contabilidad fiscal</b> y no mueve caja, banco ni folios.</li>
-    <li>Para que un gasto se asigne a una habitación o tipo, debe capturarse con esa asignación en Finanzas gerenciales; los demás se reparten como gasto general.</li>
+    <li>Para que un gasto se asigne a una habitación o tipo, debe capturarse con esa asignación en Finanzas gerenciales; los demás se reparten como gasto general. Los gastos capturados como <b>Gasto operativo desde caja</b> también alimentan Costo por noche si usan alcance Hotel o Habitación, aunque recepción no ve esta pestaña.</li>
     <li>El margen aparece como <em>Pendiente</em>: no hay margen real hasta aprobar una asignación segura de pagos cobrados a cargos de hospedaje.</li>
     <li>Pagos de cuenta pendiente, transferencias internas, retiros de utilidad, salidas bancarias sin clasificación y ajustes sin gasto quedan excluidos del costo.</li>
     <li>Los costos excluidos se listan con su razón y contexto para que los ubiques en Finanzas gerenciales o Banco.</li>
@@ -1356,7 +1358,7 @@ details.faq .a p { margin-bottom: 8px; }
       <div class="browser-bar" aria-hidden="true"><span class="browser-dots"><span></span><span></span><span></span></span><span class="browser-url">/finance?tab=bank</span></div>
       <button type="button" class="shot-link" data-full="img/24-banco.png" aria-label="Ampliar captura: Módulo de banco"><img src="img/24-banco.png" alt="Módulo de banco" /></button>
     </div>
-    <figcaption><b>Banco.</b> Cuentas y movimientos bancarios separados del efectivo de caja, con exportación CSV/XLSX. Las cuentas las crea gerencia/admin cuando el hotel está listo. Captura recomendada para reemplazo: mostrar cuentas/acciones demo sin sugerir saldos a recepción.</figcaption>
+    <figcaption><b>Banco.</b> Cuentas y movimientos bancarios separados del efectivo de caja, con exportación CSV/XLSX. Las cuentas las crea gerencia/admin cuando el hotel está listo. <b>Captura pendiente:</b> reemplazar por una captura limpia del módulo Banco sin dropdown recortado.</figcaption>
   </figure>
   <ul>
     <li>Visible para gerencia, admin y auditoría. Recepción ve nombres de cuentas al cobrar (nunca saldos).</li>
@@ -1455,7 +1457,7 @@ details.faq .a p { margin-bottom: 8px; }
 
   <details class="faq"><summary>Necesito corregir un error de un día ya auditado</summary><div class="a"><p>El movimiento original no se toca. Gerencia/admin crean una <b>corrección post-cierre</b> (movimiento compensatorio enlazado) con motivo obligatorio. Reabrir el día auditado se reserva para excepciones.</p></div></details>
 
-  <details class="faq"><summary>¿Cómo ejecuto la auditoría nocturna o reabro un día?</summary><div class="a"><p>Desde <b>Reportes</b> con cuenta de gerencia/admin. La auditoría requiere que no haya turnos activos. Reabrir un día exige motivo y queda registrado con usuario, fecha y razón.</p></div></details>
+  <details class="faq"><summary>¿Cómo ejecuto la auditoría nocturna o reabro un día?</summary><div class="a"><p>Desde <b>Finanzas → Reportes operativos</b> con cuenta de gerencia/admin. La auditoría requiere que no haya turnos activos. Reabrir un día exige motivo y queda registrado con usuario, fecha y razón.</p></div></details>
 
   <details class="faq"><summary>La tarifa de la reserva no coincide con lo esperado</summary><div class="a"><p>Primero revisa el badge de la reserva: si está en <b>Precio pactado bloqueado</b>, el total acordado se respeta aunque el sistema calcule otro. Si está en <b>Tarifa automática</b>, revisa la cascada: un override manual gana a la regla de temporada, y la regla gana a la tarifa base. Ve a Tarifas para ver qué aplica cada día.</p></div></details>
 
@@ -1465,13 +1467,13 @@ details.faq .a p { margin-bottom: 8px; }
 
   <details class="faq"><summary>Veo movimientos en Balance que no salen en el corte por turno</summary><div class="a"><p>Seguramente son movimientos históricos importados o registrados fuera de turno (como movimientos bancarios gerenciales). El balance global los muestra; el corte operativo solo incluye lo ligado al turno seleccionado.</p></div></details>
 
-  <details class="faq"><summary>¿Cómo saco dinero de caja como egreso simple?</summary><div class="a"><p>Recepción solo puede registrar egreso simple en efectivo desde Caja. Si la salida es un gasto real con proveedor/categoría, una compra a crédito, un pago de cuenta pendiente o un retiro de utilidad, no uses egreso simple: debe operarlo gerencia/admin en Finanzas gerenciales.</p></div></details>
+  <details class="faq"><summary>¿Cómo saco dinero de caja como egreso simple o gasto operativo?</summary><div class="a"><p>Si es una salida menor sin gasto real categorizado, usa <b>Egreso simple</b>: siempre efectivo y desde tu turno. Si debe contar como gasto operativo cash-only categorizado, usa <b>Gasto operativo desde caja</b>: requiere turno propio abierto o reabierto, categoría activa y alcance Hotel o Habitación. Si es compra a crédito, pago de cuenta pendiente, retiro de utilidad o movimiento bancario, escala a gerencia/admin.</p></div></details>
 
   <details class="faq"><summary>¿Cómo hago un retiro de utilidad?</summary><div class="a"><p>Solo gerencia/admin. El retiro de utilidad es salida para el dueño, socia o empresa relacionada; no es gasto operativo, pago a proveedor, pago de tarjeta ni pago de cuenta pendiente. Si recepción necesita reportarlo, debe escalarlo.</p></div></details>
 
   <details class="faq"><summary>¿Qué es una cuenta pendiente?</summary><div class="a"><p>Es una deuda del hotel con un proveedor, acreedor, tarjeta o persona relacionada. Pagarla baja la deuda y la liquidez, pero no crea un gasto nuevo. Recepción no captura cuentas pendientes.</p></div></details>
 
-  <details class="faq"><summary>¿Cómo exporto el corte por turno?</summary><div class="a"><p>Reportes → pestaña <b>Corte por turno</b> → elige modo Por turno o Por día operativo → selecciona el turno o la fecha → <b>Exportar XLSX</b>.</p></div></details>
+  <details class="faq"><summary>¿Cómo exporto el corte por turno?</summary><div class="a"><p>Finanzas → pestaña <b>Reportes operativos</b> → <b>Corte por turno</b> → elige modo Por turno o Por día operativo → selecciona el turno o la fecha → <b>Exportar XLSX</b>.</p></div></details>
 
   <details class="faq"><summary>Una habitación no aparece como disponible</summary><div class="a"><p>Revisa en Housekeeping si está sucia, en mantenimiento o bloqueada, y si tiene un bloqueo activo para esas fechas.</p></div></details>
 
