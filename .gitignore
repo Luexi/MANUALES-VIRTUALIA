@@ -1,0 +1,8 @@
+# Registros de sesiones de navegador automatizado (Playwright/MCP)
+.playwright-mcp/
+
+# Configuracion local de agentes
+.claude/
+
+# Snapshot local de referencia del manual de Azul (no se publica)
+manualoperativo_azul.md
