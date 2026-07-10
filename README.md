@@ -18,7 +18,7 @@ MANUALES-VIRTUALIA/
   pms/
     index.html
     img/
-      27 PNG del manual PMS
+      29 PNG del manual PMS
       pms-mark.svg
   hub/
     index.html
@@ -75,5 +75,5 @@ https://luexi.github.io/MANUALES-VIRTUALIA/
 
 - Abrir `index.html` con doble clic.
 - Confirmar que los enlaces a `pms/`, `hub/` y `condo/` cargan.
-- Confirmar que `pms/` conserva sus 27 PNG y `pms-mark.svg`.
+- Confirmar que `pms/` conserva sus 29 PNG y `pms-mark.svg`.
 - Confirmar que Hub y Condo no publican secretos, datos reales ni promesas falsas.
