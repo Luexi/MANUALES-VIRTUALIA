@@ -8,7 +8,7 @@ Es un sitio estatico pequeno: no tiene build step, npm, frameworks, backend ni d
 
 ## Orden de lectura canonico
 
-Para cualquier tarea, lee en este orden:
+Para una tarea amplia de estructura o publicacion, lee en este orden:
 
 1. `README.md`
 2. `DESIGN.md`
@@ -27,7 +27,9 @@ Fuentes de verdad cuando haya conflicto:
 
 No cargues ni revises todo el repo si la tarea es localizada. Empieza por el area afectada y amplia contexto solo cuando el cambio lo exija.
 
-Piensa antes de modificar. Si una ambiguedad puede resolverse leyendo archivos, investiga primero. Si sigue habiendo opciones incompatibles, pregunta antes de tocar.
+Para una tarea localizada, lee esta guia, el documento dueño del area y los archivos afectados. Abre otras referencias solo cuando resuelvan una pregunta del encargo.
+
+Piensa antes de modificar. Resuelve primero la ambiguedad desde los archivos y la peticion. Pregunta solo si queda una opcion material de producto, permisos o contrato que no puedas resolver razonablemente; continua las partes independientes ya autorizadas.
 
 ## Alcance del repo
 
@@ -140,7 +142,7 @@ Este repo pequeno puede trabajarse sobre `main`, con disciplina:
 - No mezcles cambios no relacionados.
 - No reviertas trabajo ajeno sin peticion explicita.
 - Usa commits claros y acotados.
-- Haz `push` solo si el remoto esta configurado y no requiere interaccion inesperada.
+- Haz commit o `push` cuando la autorizacion vigente incluya esa accion. Para `push`, identifica el remoto y destino autorizados; tener un remoto configurado no constituye permiso. No repitas una confirmacion que ya cubra la misma accion y destino.
 
 ## Entregable esperado
 
