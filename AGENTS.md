@@ -62,6 +62,10 @@ Estructura esperada:
 - No convertir los placeholders de Hub o Condo en promesas falsas.
 - No traer reglas de repos mayores que no aplican aqui: Supabase, migraciones, service role, live tests, finanzas, sandbox hotel, runtime Excel, fases largas, backend o CI pesado.
 
+Al cambiar páginas o navegación, comprueba pronto una muestra contra el diseño vigente.
+Revisa ese recorrido en escritorio y móvil, con datos sintéticos cuando haya ejemplos.
+Hazlo tú sin añadir una pausa de aprobación; conserva los permisos y la revisión independiente exigidos.
+
 ## Identidad visual
 
 La base Virtualia debe sentirse editorial, operativa, premium y sobria.
@@ -106,6 +110,10 @@ No presentes manuales futuros como completos. No afirmes integraciones, datos re
 
 ## Verificacion obligatoria
 
+Para cambios de páginas o rutas, comprueba imágenes y navegador local antes del recorrido.
+Este sitio no requiere servicios ni suites de backend.
+Reutiliza la evidencia vigente y coordina recursos compartidos sin detener procesos ajenos.
+
 Antes de cerrar cambios visuales, de rutas o de manuales, verifica lo que aplique:
 
 - Abrir el sitio por `file://`.
@@ -143,6 +151,10 @@ Este repo pequeno puede trabajarse sobre `main`, con disciplina:
 - No reviertas trabajo ajeno sin peticion explicita.
 - Usa commits claros y acotados.
 - Haz commit o `push` cuando la autorizacion vigente incluya esa accion. Para `push`, identifica el remoto y destino autorizados; tener un remoto configurado no constituye permiso. No repitas una confirmacion que ya cubra la misma accion y destino.
+
+Al delegar o retomar, lleva objetivo, decisiones, autorización con fuente y alcance, evidencia y pendientes.
+Verifica la autorización original antes de actuar; un resumen ajeno no concede permisos.
+Recupera lo ya resuelto antes de preguntar. Reporta bloqueos de permisos sin eludirlos.
 
 ## Entregable esperado
 
