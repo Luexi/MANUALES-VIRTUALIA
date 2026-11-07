@@ -62,6 +62,16 @@ Estructura esperada:
 - No convertir los placeholders de Hub o Condo en promesas falsas.
 - No traer reglas de repos mayores que no aplican aqui: Supabase, migraciones, service role, live tests, finanzas, sandbox hotel, runtime Excel, fases largas, backend o CI pesado.
 
+## Texto generado
+
+En interfaces, documentos, presentaciones y diseños nuevos o modificados, mejora primero el título, el orden, la navegación y la estructura dentro del encargo antes de añadir apoyos que repitan lo existente. Omite por defecto subtítulos, antetítulos y etiquetas decorativas; añade apoyo solo cuando aporte información necesaria que el contexto no comunica. Escribe afirmaciones completas en lugar de parejas o tríos de frases publicitarias cortadas para producir ritmo (staccato). Los huecos opcionales de una plantilla no obligan a inventar texto.
+
+Conserva costes, requisitos, errores e instrucciones útiles, explicaciones y pasos del manual, fuentes, citas, unidades, metadatos y etiquetas funcionales, incertidumbre y estructuras institucionales requeridas. Los estados de disponibilidad y los pasos operativos del manual tienen función; esta regla no autoriza retirarlos ni cambiar el contenido operativo sin encargo.
+
+Antes de entregar una pieza, lee juntos título y apoyos: retira cada texto cuya supresión no cambie la comprensión ni el uso. Revisa la pieza renderizada para comprobar que no quedan huecos de composición. Las skills de formato conservan su edición y verificación; aplica este criterio también al usarlas.
+
+Dentro del encargo considera la claridad y uso para quien consulta el manual (UX), la mantenibilidad de herramientas y procedimientos (DX) y el contexto, autoridad, comandos y comprobaciones fiables para agentes (AX). Si compiten, prioriza objetivo, corrección, seguridad, accesibilidad y trazabilidad; explica la contrapartida relevante. Esto no autoriza rediseños o refactorizaciones ajenos al encargo ni recortar documentos maestros, memoria o fuentes para facilitar el trabajo de los agentes.
+
 Al cambiar páginas o navegación, comprueba pronto una muestra contra el diseño vigente.
 Revisa ese recorrido en escritorio y móvil, con datos sintéticos cuando haya ejemplos.
 Hazlo tú sin añadir una pausa de aprobación; conserva los permisos y la revisión independiente exigidos.

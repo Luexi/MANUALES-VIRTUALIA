@@ -48,9 +48,13 @@ La direccion visual es una biblioteca de producto: papel calido, tipografia ampl
 - La landing madre debe sentirse Virtualia y biblioteca, no PMS.
 - El logo Virtualia TIC puede aparecer como endoso institucional en landing o footer, pero no reemplaza los marks de PMS, Hub o Condo.
 
+## Texto de los componentes
+
+Aplica [Texto generado de AGENTS.md](AGENTS.md#texto-generado) al crear o modificar piezas: la descripción de una tarjeta o el apoyo de una cabecera es opcional según su información, no un hueco obligatorio del componente. Conserva los estados de disponibilidad, las rutas y las instrucciones operativas que permiten usar la biblioteca.
+
 ## Componentes
 
-- Landing selector card: panel editorial con mark, estado, descripcion, ruta y acento lateral.
+- Landing selector card: panel editorial con mark, estado, descripcion cuando aporte informacion necesaria, ruta y acento lateral.
 - Product status chip: estado claro como `Disponible`, `Proximamente` o `Manual en preparacion`.
 - Manual header: lockup de producto y regreso a biblioteca.
 - Content shell: columnas de lectura con panel lateral de estado.
