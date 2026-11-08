@@ -166,6 +166,12 @@ Al delegar o retomar, lleva objetivo, decisiones, autorización con fuente y alc
 Verifica la autorización original antes de actuar; un resumen ajeno no concede permisos.
 Recupera lo ya resuelto antes de preguntar. Reporta bloqueos de permisos sin eludirlos.
 
+## Sincronizar con el remoto
+
+**Antes de editar:** ejecuta `git fetch` y `git status -sb`.
+- Si la rama está atrás del remoto y no hay cambios locales, actualiza con `git pull --ff-only`.
+- Si hay cambios locales sin commit o la rama divergió del remoto, no edites: avisa a Luis.
+
 ## Entregable esperado
 
 Al cerrar una tarea, reporta:
