@@ -29,7 +29,7 @@ No cargues ni revises todo el repo si la tarea es localizada. Empieza por el are
 
 Para una tarea localizada, lee esta guia, el documento dueño del area y los archivos afectados. Abre otras referencias solo cuando resuelvan una pregunta del encargo.
 
-Piensa antes de modificar. Resuelve primero la ambiguedad desde los archivos y la peticion. Pregunta solo si queda una opcion material de producto, permisos o contrato que no puedas resolver razonablemente; continua las partes independientes ya autorizadas.
+Resuelve primero la ambiguedad desde los archivos y la peticion. Pregunta solo si queda una opcion material de producto, permisos o contrato que no puedas resolver razonablemente; continua las partes independientes ya autorizadas.
 
 ## Alcance del repo
 
